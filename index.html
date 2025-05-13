@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirzenhainer Weinenthusiasten</title>
+    <style>
+        /* ROOT Variables */
+        :root {
+            --cream: #f8f4e9;
+            --cream-dark: #eae3d0;
+            --wine-red: #722f37;
+            --wine-red-dark: #5a2029;
+            --wine-red-light: #9e4d57;
+        }
+
+        /* Global Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+        }
+
+        body {
+            background-color: var(--cream);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--wine-red);
+            color: var(--cream);
+            padding: 20px 0;
+            position: sticky; /* Make header sticky */
+            top: 0;
+            z-index: 100; /* Ensure header is above other content */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Optional shadow */
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none; /* Remove underline if logo is a link */
+            color: var(--cream);
+        }
+
+        .logo span {
+            color: var(--cream-dark);
+            font-style: italic;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding: 5px 0; /* Add padding for better click area */
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--cream-dark);
+        }
+
+        /* Underline effect on hover */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--cream-dark);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh; /* Use min-height for flexibility */
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(114, 47, 55, 0.7), rgba(114, 47, 55, 0.5)), url('Hintergrund.png') center/cover no-repeat;
+            color: var(--cream);
+            /* Fallback background color if image fails */
+            background-color: var(--wine-red-dark);
+        }
+
+        .hero-content {
+            max-width: 700px;
+            padding: 50px;
+            background-color: rgba(90, 32, 41, 0.85); /* Slightly more opaque */
+            border-radius: 5px;
+            margin-left: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Darker shadow */
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--wine-red);
+            color: var(--cream);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid var(--cream);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--cream);
+            color: var(--wine-red);
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px; /* Increased margin */
+            color: var(--wine-red);
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center; /* Center title */
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%; /* Center line */
+            transform: translateX(-50%); /* Center line */
+            width: 100px;
+            height: 3px;
+            background-color: var(--wine-red);
+        }
+
+        /* General Section Padding */
+        section {
+            padding: 100px 0;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--cream);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+         .about-image img:hover {
+            transform: scale(1.05); /* Slight zoom on image hover */
+        }
+
+        /* Internal Wine Quote in About Section */
+         .wine-quote {
+            font-style: italic;
+            text-align: center;
+            max-width: 800px;
+            margin: 40px auto 40px; /* Adjusted margin */
+            color: var(--wine-red-dark); /* Use darker red */
+            font-size: 20px; /* Slightly smaller */
+            padding: 20px;
+            border-left: 4px solid var(--wine-red-light);
+            background-color: var(--cream-dark); /* Subtle background */
+            border-radius: 5px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .quote-author {
+            display: block;
+            text-align: right;
+            margin-top: 15px;
+            font-size: 16px; /* Smaller */
+            color: #555; /* Darker grey */
+            font-weight: bold;
+        }
+
+        /* Wine Quotes Section */
+        .wine-quotes {
+            background-color: var(--cream-dark); /* Slightly darker background */
+        }
+
+        .wine-quotes .section-title {
+            color: var(--wine-red-dark); /* Darker title for contrast */
+        }
+
+        .wine-quotes .section-title::after {
+            background-color: var(--wine-red-dark); /* Match title color */
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider cards */
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .quote-card {
+            background-color: var(--cream); /* Light card background */
+            padding: 30px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: var(--wine-red-dark);
+            border-top: 5px solid var(--wine-red); /* Wine-red accent */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 180px; /* Ensure cards have some minimum height */
+        }
+
+        .quote-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 0; /* Remove default paragraph margin if needed */
+        }
+
+        .quote-text::before,
+        .quote-text::after {
+            content: '"';
+            font-size: 24px;
+            color: var(--wine-red-light);
+            margin: 0 5px;
+            vertical-align: middle; /* Align quotes better */
+        }
+
+        /* Wine Reviews Section */
+        .wine-reviews {
+            background-color: var(--wine-red-dark);
+            color: var(--cream);
+        }
+
+        /* Adjust title color and line for dark background */
+        .wine-reviews .section-title {
+            color: var(--cream);
+        }
+
+        .wine-reviews .section-title::after {
+            background-color: var(--cream);
+        }
+
+         .wine-reviews > .container > p { /* Style paragraph directly under container */
+             text-align: center;
+             margin-bottom: 50px;
+             max-width: 700px; /* Limit width */
+             margin-left: auto;
+             margin-right: auto;
+             font-size: 18px;
+             color: var(--cream-dark);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .wine-card {
+            background-color: var(--cream);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #333;
+            display: flex; /* Flex layout for better structure */
+            flex-direction: column;
+        }
+
+        .wine-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .wine-image {
+            height: 220px; /* Slightly taller image */
+            position: relative;
+            overflow: hidden; /* Ensure img doesn't overflow */
+            background-color: var(--cream-dark); /* Placeholder color */
+        }
+
+        .wine-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .wine-card:hover .wine-image img {
+            transform: scale(1.08); /* Zoom image inside card on hover */
+        }
+
+
+        .wine-rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--wine-red);
+            color: var(--cream);
+            padding: 8px 15px; /* Adjusted padding */
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 14px; /* Smaller font size */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .wine-stars {
+            display: flex;
+            margin-bottom: 12px; /* Increased margin */
+            align-items: center; /* Align stars vertically */
+        }
+
+        .star {
+            color: gold;
+            font-size: 22px; /* Larger stars */
+            margin-right: 3px; /* Adjusted spacing */
+            line-height: 1; /* Prevent extra line height */
+        }
+
+        .wine-details {
+            padding: 25px;
+            flex-grow: 1; /* Allow details to fill remaining space */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wine-details h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--wine-red);
+        }
+
+        .wine-vintage {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 15px; /* Slightly smaller */
+        }
+
+        .wine-details p {
+            margin-bottom: 20px;
+            flex-grow: 1; /* Push button down */
+            font-size: 15px; /* Consistent text size */
+        }
+
+
+        /* NEW: Wine Jokes Section */
+        .wine-jokes {
+            background-color: var(--cream); /* Light background */
+        }
+        /* Title styling for light background */
+        .wine-jokes .section-title {
+            color: var(--wine-red);
+        }
+        .wine-jokes .section-title::after {
+             background-color: var(--wine-red);
+        }
+
+        .jokes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .joke-card {
+            background-color: var(--cream-dark); /* Slightly darker card background */
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: var(--wine-red-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid var(--wine-red-light); /* Accent on the left */
+        }
+
+        .joke-card:hover {
+            transform: scale(1.03); /* Scale up slightly on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .joke-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        .joke-answer {
+            font-style: italic;
+            font-size: 16px;
+            color: #555; /* Slightly muted answer color */
+        }
+
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--wine-red-dark);
+            color: var(--cream);
+        }
+
+        /* Adjust title color and line for dark background */
+         .contact .section-title {
+            color: var(--cream);
+        }
+        .contact .section-title::after {
+             background-color: var(--cream);
+        }
+
+        .contact-wrapper {
+            display: flex;
+            gap: 50px;
+            margin-top: 50px; /* Add margin below title */
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .contact-info p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .contact-details {
+            margin-top: 30px;
+        }
+
+        .contact-details p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px; /* Increased spacing */
+            font-size: 16px; /* Slightly smaller text */
+        }
+
+        .contact-details i {
+            margin-right: 15px;
+            color: var(--cream-dark);
+            font-size: 20px;
+            width: 25px; /* Give icons a fixed width */
+            text-align: center;
+            flex-shrink: 0; /* Prevent icon shrinking */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--cream-dark); /* Lighter label color */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px; /* Adjusted padding */
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--cream);
+            border: 1px solid var(--cream-dark);
+            transition: background-color 0.3s, border-color 0.3s;
+            font-size: 16px;
+        }
+
+        .form-control::placeholder { /* Style placeholder text */
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--cream);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+         .contact .btn { /* Style button in contact section */
+            background-color: var(--cream);
+            color: var(--wine-red);
+            border-color: var(--cream);
+            font-weight: bold;
+         }
+         .contact .btn:hover {
+             background-color: var(--cream-dark);
+             border-color: var(--cream-dark);
+             color: var(--wine-red-dark);
+         }
+
+        /* Footer */
+        footer {
+            background-color: var(--wine-red);
+            color: var(--cream);
+            padding: 60px 0 30px; /* Adjusted padding */
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 30px; /* Add gap between columns */
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px; /* Minimum width before wrapping */
+            padding: 0 15px; /* Reduced padding */
+            text-align: left;
+            margin-bottom: 20px; /* Add margin for wrapped items */
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--cream);
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--cream-dark);
+        }
+
+        .footer-column p {
+            color: var(--cream-dark); /* Softer text color */
+            font-size: 15px;
+            margin-bottom: 20px; /* Add margin below paragraph */
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px; /* Adjusted spacing */
+        }
+
+        .footer-column ul li a {
+            color: var(--cream-dark); /* Softer link color */
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--cream); /* Brighter on hover */
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 18px; /* Increased gap */
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--cream-dark); /* Softer icon color */
+            font-size: 24px; /* Larger icons */
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--cream); /* Brighter on hover */
+            transform: scale(1.1);
+        }
+
+        /* Footer Newsletter Form */
+         .footer-column form .form-group {
+             margin-bottom: 10px;
+         }
+         .footer-column form .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--cream-dark);
+            color: var(--cream);
+         }
+         .footer-column form .form-control::placeholder {
+             color: rgba(255, 255, 255, 0.5);
+         }
+          .footer-column form .form-control:focus {
+             border-color: var(--cream);
+             background-color: rgba(255, 255, 255, 0.15);
+         }
+         .footer-column form .btn {
+            width: 100%;
+            background-color: var(--cream);
+            color: var(--wine-red);
+            border-color: var(--cream);
+         }
+         .footer-column form .btn:hover {
+             background-color: var(--cream-dark);
+             border-color: var(--cream-dark);
+             color: var(--wine-red-dark);
+         }
+
+
+        .copyright {
+            margin-top: 40px; /* Increased margin */
+            padding-top: 30px; /* Increased padding */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%; /* Ensure copyright spans full width */
+            color: var(--cream-dark); /* Softer text */
+            font-size: 14px;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--wine-red);
+            color: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease; /* Smoother transition */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--cream);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background-color: var(--wine-red-dark);
+            transform: translateY(-3px);
+        }
+        .back-to-top i {
+            font-size: 18px;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); /* Darker overlay */
+            z-index: 1000;
+            display: flex; /* Use flex to center */
+            justify-content: center;
+            align-items: center;
+            opacity: 0; /* Start invisible for transition */
+            visibility: hidden; /* Start hidden */
+            transition: opacity 0.3s ease, visibility 0s 0.3s linear; /* Delay visibility hide */
+            padding: 20px; /* Add padding for smaller screens */
+        }
+
+        .modal.active {
+             opacity: 1;
+             visibility: visible;
+             transition: opacity 0.3s ease, visibility 0s 0s linear;
+        }
+
+        .modal-content {
+            background-color: var(--cream);
+            padding: 30px 40px; /* Adjusted padding */
+            border-radius: 10px;
+            width: 100%; /* Full width on small screens */
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            color: #333; /* Set text color for modal content */
+            transform: scale(0.95) translateY(-20px); /* Start slightly smaller and above */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0; /* Start content invisible */
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1) translateY(0); /* Scale and move to normal position */
+            opacity: 1;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; /* Adjust position */
+            right: 15px; /* Adjust position */
+            font-size: 30px; /* Larger close icon */
+            font-weight: 300; /* Lighter weight */
+            line-height: 1;
+            cursor: pointer;
+            color: var(--wine-red-light);
+            transition: color 0.3s, transform 0.3s;
+            padding: 5px; /* Add padding for easier clicking */
+        }
+
+        .close-modal:hover {
+            color: var(--wine-red-dark);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 26px; /* Slightly larger title */
+            margin-bottom: 15px; /* Reduced margin */
+            color: var(--wine-red);
+            text-align: center;
+            font-weight: 700;
+        }
+         .modal p {
+            text-align: center;
+            margin-bottom: 25px; /* Increased margin */
+            color: #555;
+         }
+
+        /* Style form elements inside modal */
+        .modal .form-group label {
+            color: var(--wine-red-dark);
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .modal .form-control {
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px 12px; /* Adjusted padding */
+            /* Wichtig: Überschreibt die allgemeinen .form-control Stile für das Modal */
+            background-color: #ffffff;
+            color: #333;
+        }
+        .modal .form-control::placeholder {
+            color: #999; /* Placeholder Farbe im Modal anpassen */
+        }
+        .modal .form-control:focus {
+            border-color: var(--wine-red-light);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(158, 77, 87, 0.2); /* Focus ring */
+            background-color: #ffffff; /* Sicherstellen, dass Hintergrund weiß bleibt */
+        }
+         .modal .btn {
+            width: 100%;
+            margin-top: 15px; /* Adjusted margin */
+            padding: 12px 20px; /* Consistent padding */
+            background-color: var(--wine-red);
+            color: var(--cream);
+            border-color: var(--wine-red);
+            font-size: 16px;
+            font-weight: bold;
+         }
+         .modal .btn:hover {
+            background-color: var(--wine-red-dark);
+            color: var(--cream);
+            border-color: var(--wine-red-dark);
+            transform: translateY(-2px);
+         }
+          #waitlistFeedback {
+              text-align: center;
+              margin-top: 15px;
+              color: var(--wine-red);
+              font-weight: bold;
+              min-height: 1.2em; /* Reserve space for feedback */
+              display: none; /* Feedback initial ausblenden */
+          }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                margin-left: 0;
+                max-width: 90%;
+                padding: 30px;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image {
+                margin-top: 40px; /* Increased space */
+                 max-width: 500px; /* Limit image width */
+                 width: 100%;
+            }
+
+            .contact-wrapper {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .contact-info, .contact-form {
+                 text-align: center;
+             }
+             .contact-details {
+                 display: flex;
+                 flex-direction: column;
+                 align-items: center;
+             }
+            .contact-details p {
+                justify-content: center;
+                text-align: left; /* Keep text left-aligned */
+                max-width: 300px; /* Limit width */
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+             .hero {
+                 min-height: 75vh; /* Shorter hero */
+                 background-attachment: scroll; /* Disable fixed background on mobile for performance */
+            }
+            .hero-content {
+                 max-width: 100%;
+                 margin: 0 20px; /* Add horizontal margin */
+                 padding: 30px 25px;
+             }
+            .hero-content h1 {
+                font-size: 30px; /* Smaller heading */
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .logo {
+                 margin-bottom: 15px;
+             }
+
+            nav ul {
+                margin-top: 0; /* Remove top margin */
+                justify-content: center;
+                flex-wrap: wrap; /* Allow nav items to wrap */
+                padding-left: 0; /* Remove default padding */
+            }
+
+            nav ul li {
+                margin: 5px 10px; /* Adjust spacing for wrapped items */
+            }
+
+            section {
+                padding: 80px 0; /* Reduced padding for sections */
+            }
+
+            .section-title {
+                font-size: 30px; /* Smaller section titles */
+                 margin-bottom: 30px;
+             }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px; /* Reduced gap */
+            }
+
+            .footer-column {
+                text-align: center; /* Center footer column content */
+                margin-bottom: 30px;
+                min-width: unset; /* Remove min-width */
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .reviews-grid, .quotes-grid, .jokes-grid { /* Added jokes-grid */
+                grid-template-columns: 1fr; /* Stack cards */
+                gap: 25px; /* Reduced gap */
+            }
+
+            .contact-wrapper {
+                margin-top: 30px;
+            }
+            .modal-content {
+                padding: 25px 30px;
+            }
+            .modal-title {
+                font-size: 22px;
+            }
+        }
+         @media (max-width: 480px) {
+             .hero-content h1 {
+                 font-size: 26px;
+             }
+             .hero-content p {
+                 font-size: 15px;
+             }
+             .btn {
+                 padding: 10px 20px;
+                 font-size: 15px;
+             }
+             .logo {
+                 font-size: 24px;
+             }
+             .section-title {
+                 font-size: 26px;
+             }
+             .footer-column {
+                 padding: 0 10px;
+             }
+             .back-to-top {
+                 width: 45px;
+                 height: 45px;
+                 bottom: 20px;
+                 right: 20px;
+             }
+              .modal-content {
+                padding: 20px 25px;
+            }
+            .modal-title {
+                font-size: 20px;
+            }
+            .close-modal {
+                font-size: 26px;
+            }
+         }
+    </style>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#home" class="logo">Hirzenhainer <span>Weinenthusiasten</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Über uns</a></li>
+                    <li><a href="#reviews">Wein Reviews</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Willkommen bei den Hirzenhainer Weinenthusiasten</h1>
+            <p>Zwischen Weinwissen und Wahnsinn – wir sind ein Kreis leidenschaftlicher Genießer, der die feine Kunst des Weinverkostens mit einer Prise Humor und einer ordentlichen Portion Lebensfreude verbindet.</p>
+            <a href="#reviews" class="btn">Unsere Weinempfehlungen</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Über unseren Club</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Was 2023 mit einem Glas Riesling und einer Schnapsidee begann, ist heute ein fester Bestandteil der Hirzenhainer Kultur: regelmäßige Tastings, festliche Menüs, unerwartete Gäste – und immer wieder neue Entdeckungen im Glas.</p>
+                    <p>Bei uns trifft Expertise auf Experimentierfreude, Candlelight auf Korkenzieher und Tiefgang auf Trinkfreude. Ob blauer Wein, Pinot Noir oder einfach nur gute Gesellschaft – bei uns ist <em>everytime Wine o'clock</em>.</p>
+                    <div class="wine-quote">
+                        "Hirzenhain schenkt kräftig ein, Genuss muss schließlich flüssig sein."
+                        <span class="quote-author">- Hirzenhainer Weinspruch</span>
+                    </div>
+                    <!-- Button to open the modal -->
+                    <a href="#" class="btn" id="waitlistBtn">Auf die Warteliste</a>
+                </div>
+                <div class="about-image">
+                     <!-- Placeholder Image: Replace with your actual image -->
+                    <img src="Bild4.png" alt="Gesellige Weinverkostung (Beispielbild)">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wine Quotes Section -->
+    <section class="wine-quotes" id="quotes">
+        <div class="container">
+            <h2 class="section-title">Unsere Weinweisheiten</h2>
+            <div class="quotes-grid">
+                <!-- Existing & Added Quotes -->
+                <div class="quote-card"><p class="quote-text">Hirzenhain schenkt kräftig ein, Genuss muss schließlich flüssig sein.</p></div>
+                <div class="quote-card"><p class="quote-text">Ein Weinchen fein aus Hirzenhain, lädt jeden gleich zum Lachen ein.</p></div>
+                <div class="quote-card"><p class="quote-text">Riesling, Merlot, Chardonnay – Hauptsach' ist, uns tut nichts weh!</p></div>
+                <div class="quote-card"><p class="quote-text">Bei Wein und Spaß in Hirzenhain will keiner heut' lang nüchtern sein.</p></div>
+                <div class="quote-card"><p class="quote-text">Lieber vollmundig trinken, als kleinkariert denken!</p></div>
+                <div class="quote-card"><p class="quote-text">Hoch die Gläser, tief die Kehlen, gute Tropfen darf man nicht quälen.</p></div>
+                <div class="quote-card"><p class="quote-text">Bei Wein, Gesang und frohem Sinn – schenk nach, ich weiß nicht, wo ich bin!</p></div>
+                <div class="quote-card"><p class="quote-text">Mögen unsere Gläser niemals leer, und unser Kopf nie allzu schwer!</p></div>
+                <div class="quote-card"><p class="quote-text">Wein rein, Sorgen raus – so sieht Lebensfreude aus!</p></div>
+                <div class="quote-card"><p class="quote-text">Wein macht froh und hebt den Geist – wer anders denkt, hat schlecht gespeist!</p></div>
+                <div class="quote-card"><p class="quote-text">Ob Korken ploppt, ob Schrauber dreht, Hauptsach', dass der Pegel steht.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wine Reviews Section -->
+    <section class="wine-reviews" id="reviews">
+        <div class="container">
+            <h2 class="section-title">Wein Reviews</h2>
+            <p>Entdecken Sie unsere Weinempfehlungen – handverlesen und von unseren Experten verkostet und bewertet.</p>
+
+            <div class="reviews-grid">
+                <!-- Wine Card 1 -->
+                <div class="wine-card">
+                    <div class="wine-image">
+                        <img src="Bild1.png" alt="Château Margaux Rotwein Flasche (Beispielbild)">
+                        <div class="wine-rating">5/5</div>
+                    </div>
+                    <div class="wine-details">
+                        <h3>Château Margaux</h3>
+                        <div class="wine-vintage">Jahrgang 2015</div>
+                        <div class="wine-stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p>Ein außergewöhnlicher Wein mit komplexen Aromen von schwarzen Früchten, subtilen Gewürznoten und einem Hauch von Eichenholz. Am Gaumen kraftvoll, aber elegant mit seidigen Tanninen.</p>
+                    </div>
+                </div>
+                <!-- Wine Card 2 -->
+                <div class="wine-card">
+                    <div class="wine-image">
+                        <img src="Bild2.png" alt="Mosel Riesling Spätlese Weißwein Flasche (Beispielbild)">
+                        <div class="wine-rating">4/5</div>
+                    </div>
+                    <div class="wine-details">
+                        <h3>Mosel Riesling Spätlese</h3>
+                        <div class="wine-vintage">Jahrgang 2020</div>
+                        <div class="wine-stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color: #ccc;">★</span>
+                        </div>
+                        <p>Frischer, mineralischer Riesling mit Noten von grünem Apfel, Pfirsich und einem Hauch von Honig. Die ausgewogene Säure und Restsüße sorgen für ein harmonisches Geschmackserlebnis.</p>
+                    </div>
+                </div>
+                 <!-- Wine Card 3 -->
+                <div class="wine-card">
+                    <div class="wine-image">
+                        <img src="Bild3.png" alt="Provence Roséwein Flasche (Beispielbild)">
+                        <div class="wine-rating">3/5</div>
+                    </div>
+                    <div class="wine-details">
+                        <h3>Provence Rosé</h3>
+                        <div class="wine-vintage">Jahrgang 2023</div>
+                        <div class="wine-stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color: #ccc;">★</span><span class="star" style="color: #ccc;">★</span>
+                        </div>
+                        <p>Leichter, erfrischender Rosé mit Aromen von Erdbeeren, Himbeeren und einem Hauch von Zitrus. Perfekt für warme Sommerabende und als Begleitung zu leichten Gerichten.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Wine Jokes Section -->
+    <section class="wine-jokes" id="jokes">
+        <div class="container">
+            <h2 class="section-title">Weinwitze</h2>
+            <div class="jokes-grid">
+                <div class="joke-card">
+                    <p class="joke-question">Was sagte der Weißwein zum Rotwein?</p>
+                    <p class="joke-answer">„Sei nicht sauer, nur weil ich leichter im Abgang bin!“</p>
+                </div>
+                <div class="joke-card">
+                    <p class="joke-question">Was ist der Unterschied zwischen Wein und deiner Meinung?</p>
+                    <p class="joke-answer">Der Wein interessiert mich wirklich!</p>
+                </div>
+                <div class="joke-card">
+                    <p class="joke-question">Warum stehen Weinkenner nicht früh auf?</p>
+                    <p class="joke-answer">Weil sie am liebsten liegen bleiben.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Kontakt</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <p>Haben Sie Fragen oder möchten Sie auf unsere Warteliste für zukünftige Tastings? Kontaktieren Sie uns gerne!</p>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> Wein Straße 123, 35713 Hirzenhain</p>
+                        <p><i class="fas fa-phone"></i> +49 123 4567890</p>
+                        <p><i class="fas fa-envelope"></i> hirzenhainer.weinenthusiasten@web.de</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Hirzenhainer Weinenthusiasten</h3>
+                    <p>Zwischen Weinwissen und Wahnsinn – mit Leidenschaft und Lebensfreude.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/hirzenhainer_weinenthusiasten/" target="_blank" rel="noopener noreferrer" aria-label="Besuchen Sie uns auf Instagram"><i class="fab fa-instagram"></i></a>
+                         <!-- Ggf. weitere Social Links hinzufügen -->
+                        <!-- <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Besuchen Sie uns auf Facebook"><i class="fab fa-facebook-f"></i></a> -->
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">Über uns</a></li>
+                        <li><a href="#reviews">Wein Reviews</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                        <li><a href="#">Impressum</a></li> <!-- Placeholder -->
+                        <li><a href="#">Datenschutz</a></li> <!-- Placeholder -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 Hirzenhainer Weinenthusiasten. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Waitlist Modal -->
+    <div class="modal" id="waitlistModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeWaitlistModal" aria-label="Schließen">×</span>
+            <h3 class="modal-title">Auf die Warteliste</h3>
+            <p>Tragen Sie sich hier ein, um über zukünftige Tastings informiert zu werden!</p>
+
+            <!--
+            =============================================================
+            WAITLIST FORMULAR - VERBUNDEN MIT FORMSUBMIT.CO
+            =============================================================
+            WICHTIG:
+            1. Ersetze 'DEINE_ZIEL_EMAIL@BEISPIEL.COM' mit deiner echten E-Mail-Adresse,
+               an die die Wartelisten-Einträge gesendet werden sollen.
+            2. Beim allerersten Absenden dieses Formulars musst du den Link in der
+               Bestätigungs-E-Mail von FormSubmit anklicken, um die Adresse zu aktivieren.
+            3. Stelle sicher, dass die 'name'-Attribute der input-Felder sinnvoll sind.
+            4. Das _captcha=false schaltet das Captcha von FormSubmit aus.
+               Für eine Live-Seite solltest du es eventuell entfernen oder auf "true" setzen.
+            5. Mit _next kannst du auf eine eigene "Danke"-Seite weiterleiten, wenn du möchtest.
+               <input type="hidden" name="_next" value="https://DEINE_WEBSEITE.de/danke.html">
+            -->
+            <form id="waitlistForm" action="https://formsubmit.co/hirzenhainer.weinenthusiasten@web.de" method="POST">
+
+                <!-- FormSubmit Konfiguration -->
+                <input type="hidden" name="_subject" value="Neue Anmeldung für die Wein-Warteliste!">
+                <input type="hidden" name="_captcha" value="false">
+                <!-- Optional: Weiterleitung nach erfolgreichem Senden -->
+                <!-- <input type="hidden" name="_next" value="https://DEINE_DOMAIN.de/danke-warteliste"> -->
+
+                <!-- Formularfelder -->
+                <div class="form-group">
+                    <label for="waitlist-name">Name</label>
+                    <!-- WICHTIG: 'name' Attribut hinzugefügt -->
+                    <input type="text" id="waitlist-name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="waitlist-email">E-Mail</label>
+                    <!-- WICHTIG: 'name' Attribut hinzugefügt -->
+                    <input type="email" id="waitlist-email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="favorite-wine">Lieblingswein (optional)</label>
+                    <!-- WICHTIG: 'name' Attribut hinzugefügt -->
+                    <input type="text" id="favorite-wine" name="lieblingswein" class="form-control" placeholder="z.B. Riesling, Spätburgunder">
+                </div>
+                <button type="submit" class="btn">Auf die Liste</button>
+            </form>
+             <!-- Feedback area (wird nun weniger genutzt, da FormSubmit eine eigene Seite anzeigt) -->
+             <p id="waitlistFeedback"></p>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" aria-label="Zurück nach oben">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script>
+        // Back to Top Button Visibility
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+
+        // Waitlist Modal Logic (including focus trapping and Escape key)
+        const waitlistModal = document.getElementById('waitlistModal');
+        const openModalBtn = document.getElementById('waitlistBtn');
+        const closeModalBtn = document.getElementById('closeWaitlistModal');
+        const waitlistForm = document.getElementById('waitlistForm');
+        const waitlistFeedback = document.getElementById('waitlistFeedback');
+        const focusableElementsString = 'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="email"]:not([disabled]), input[type="number"]:not([disabled]), input[type="date"]:not([disabled]), input[type="datetime-local"]:not([disabled]), input[type="month"]:not([disabled]), input[type="search"]:not([disabled]), input[type="tel"]:not([disabled]), input[type="time"]:not([disabled]), input[type="url"]:not([disabled]), input[type="week"]:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        let firstFocusableElement, lastFocusableElement;
+
+        function trapTabKey(e) {
+             if (!waitlistModal.classList.contains('active')) return; // Nur aktiv, wenn Modal offen ist
+             if (e.key !== 'Tab') return;
+
+            const focusableElements = waitlistModal.querySelectorAll(focusableElementsString);
+            if (focusableElements.length === 0) return; // Keine fokussierbaren Elemente im Modal
+
+            firstFocusableElement = focusableElements[0];
+            lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey) /* shift + tab */ {
+                if (document.activeElement === firstFocusableElement) {
+                    lastFocusableElement.focus();
+                    e.preventDefault();
+                }
+            } else /* tab */ {
+                if (document.activeElement === lastFocusableElement) {
+                    firstFocusableElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+
+         function setupModalFocus() {
+             const focusableElements = waitlistModal.querySelectorAll(focusableElementsString);
+             if (focusableElements.length > 0) {
+                 firstFocusableElement = focusableElements[0];
+                 lastFocusableElement = focusableElements[focusableElements.length - 1];
+                 // Kurze Verzögerung, um sicherzustellen, dass das Modal sichtbar ist
+                 setTimeout(() => {
+                     firstFocusableElement.focus();
+                 }, 100);
+                 waitlistModal.addEventListener('keydown', trapTabKey);
+             }
+        }
+
+        function openModal() {
+            waitlistModal.classList.add('active');
+            waitlistFeedback.textContent = ''; // Clear previous feedback
+            waitlistFeedback.style.display = 'none'; // Feedback ausblenden
+            // Reset any previous validation styles
+            waitlistForm.querySelectorAll('.form-control').forEach(input => {
+                input.style.borderColor = '#ccc';
+            });
+            setupModalFocus();
+            document.addEventListener('keydown', handleEscapeKey);
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        function closeModal() {
+            waitlistModal.classList.remove('active');
+            waitlistModal.removeEventListener('keydown', trapTabKey);
+            document.removeEventListener('keydown', handleEscapeKey);
+            document.body.style.overflow = ''; // Restore background scroll
+            if (openModalBtn) {
+                openModalBtn.focus(); // Return focus to the button that opened the modal
+            }
+        }
+
+        function handleEscapeKey(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        }
+
+        if (openModalBtn) {
+            openModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+
+        // Close modal if clicking outside the content
+        if (waitlistModal) {
+            waitlistModal.addEventListener('click', (e) => {
+                if (e.target === waitlistModal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // --- Waitlist Form Submission Handling ---
+        // Da wir jetzt FormSubmit.co mit action/method verwenden,
+        // wird die Standard-Formularübermittlung des Browsers genutzt.
+        // Das JavaScript muss die Übermittlung NICHT mehr mit fetch() machen.
+        // Wir behalten aber die Client-seitige Validierung für besseres UX.
+        if (waitlistForm) {
+            waitlistForm.addEventListener('submit', (e) => {
+                 // e.preventDefault(); // NICHT mehr verhindern, damit FormSubmit funktioniert!
+
+                 const nameInput = document.getElementById('waitlist-name');
+                 const emailInput = document.getElementById('waitlist-email');
+                 // const favoriteWineInput = document.getElementById('favorite-wine'); // Optional
+
+                 const name = nameInput.value.trim();
+                 const email = emailInput.value.trim();
+
+                 let isValid = true;
+                 // Simple validation display
+                 if (!name) {
+                     nameInput.style.borderColor = 'red'; isValid = false;
+                 } else { nameInput.style.borderColor = '#ccc'; }
+                 if (!email || !/^\S+@\S+\.\S+$/.test(email)) { // Simple email check
+                     emailInput.style.borderColor = 'red'; isValid = false;
+                 } else { emailInput.style.borderColor = '#ccc'; }
+
+                 if (!isValid) {
+                     e.preventDefault(); // VERHINDERE die Übermittlung, wenn die Validierung fehlschlägt
+                     waitlistFeedback.textContent = 'Bitte füllen Sie die Pflichtfelder korrekt aus.';
+                     waitlistFeedback.style.color = 'red';
+                     waitlistFeedback.style.display = 'block'; // Feedback anzeigen
+                     return; // Stoppe hier
+                 }
+
+                 // Wenn die Validierung erfolgreich ist, wird das Formular
+                 // normal über den Browser an die FormSubmit-URL gesendet.
+                 // Das Feedback hier wird wahrscheinlich nicht mehr angezeigt,
+                 // da der Browser zur FormSubmit-Seite/Captcha weiterleitet.
+                 // Man könnte das Feedback kurz anzeigen, bevor die Weiterleitung passiert,
+                 // aber es ist unzuverlässig.
+                 // waitlistFeedback.textContent = 'Daten werden gesendet...';
+                 // waitlistFeedback.style.color = 'var(--wine-red)';
+                 // waitlistFeedback.style.display = 'block';
+
+                 // Kein waitlistForm.reset() hier, das würde die Übermittlung stören.
+                 // Kein setTimeout(closeModal) hier, FormSubmit übernimmt.
+            });
+        }
+
+        // Reset border color on input for required fields in the modal
+        waitlistForm?.querySelectorAll('.form-control[required]').forEach(input => {
+            input.addEventListener('input', () => {
+                let fieldIsValid = true;
+                if(input.value.trim() === '') fieldIsValid = false;
+                if(input.type === 'email' && !/^\S+@\S+\.\S+$/.test(input.value.trim())) fieldIsValid = false;
+
+                if (fieldIsValid) {
+                     input.style.borderColor = '#ccc';
+                     // Check if all required fields are now potentially valid to clear general error
+                     const nameInput = document.getElementById('waitlist-name');
+                     const emailInput = document.getElementById('waitlist-email');
+                      if (nameInput.value.trim() && emailInput.value.trim() && /^\S+@\S+\.\S+$/.test(emailInput.value.trim()) && waitlistFeedback.style.color === 'red') {
+                          waitlistFeedback.textContent = '';
+                          waitlistFeedback.style.display = 'none';
+                      }
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
