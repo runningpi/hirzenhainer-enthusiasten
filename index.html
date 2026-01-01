@@ -1,0 +1,2539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirzenhainer Weinenthusiasten | Exklusiver Weinclub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ROOT Variables */
+        :root {
+            --cream: #fdfbf7;
+            --cream-dark: #f2ede0;
+            --wine-red: #5c1a21;
+            --wine-red-dark: #3d0d12;
+            --wine-red-light: #8e3a45;
+            --gold: #c5a059;
+            --text-dark: #2c2c2c;
+            --text-light: #666666;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Global Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .logo, .wine-quote {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        header {
+            background-color: transparent;
+            padding: 30px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: rgba(253, 251, 247, 0.98);
+            padding: 15px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--cream); /* White on hero */
+            transition: var(--transition);
+        }
+
+        header.scrolled .logo {
+            font-size: 28px;
+            color: var(--wine-red); /* Dark when scrolled */
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 35px;
+        }
+
+        nav ul li a {
+            color: var(--cream); /* White on hero */
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 10px 0;
+        }
+
+        header.scrolled nav ul li a {
+            color: var(--text-dark); /* Dark when scrolled */
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu */
+        nav ul li.has-dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-toggle i {
+            transition: var(--transition);
+        }
+
+        nav ul li.has-dropdown:hover .dropdown-toggle i,
+        .dropdown-menu.active ~ .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            margin: 0;
+        }
+
+        .dropdown-menu li a {
+            color: var(--text-dark);
+            padding: 15px 25px;
+            display: block;
+            border-bottom: 1px solid var(--cream-dark);
+            white-space: nowrap;
+        }
+
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background: var(--cream-dark);
+            color: var(--wine-red);
+        }
+
+        .dropdown-menu li a::after {
+            display: none;
+        }
+
+        nav ul li.main-link {
+            display: block;
+        }
+
+        nav ul li.extended-link {
+            display: none;
+        }
+
+        /* Hamburger Button - Hidden by default */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--cream);
+            transition: var(--transition);
+        }
+
+        header.scrolled .hamburger {
+            color: var(--wine-red);
+        }
+
+        /* Mobile Nav */
+        @media (max-width: 992px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--cream);
+                max-height: 0;
+                overflow: hidden;
+                transition: var(--transition);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+
+            nav.active {
+                max-height: 100vh;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 40px 0;
+            }
+
+            nav ul li {
+                margin: 0;
+                padding: 15px 0;
+            }
+
+            nav ul li a {
+                color: var(--text-dark) !important; /* Always dark in mobile menu dropdown */
+            }
+
+            nav ul li.main-link,
+            nav ul li.extended-link {
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: transparent;
+                margin-top: 0;
+                min-width: auto;
+                display: none;
+            }
+
+            nav.active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-menu li a {
+                padding-left: 40px;
+                font-size: 14px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Hintergrund.png') center/cover no-repeat;
+            color: var(--cream);
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s forwards 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 84px;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 45px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--wine-red);
+            color: var(--cream);
+            padding: 18px 45px;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--cream);
+            color: var(--cream);
+        }
+
+        .btn-outline::before {
+            background-color: var(--cream);
+        }
+
+        .btn-outline:hover {
+            color: var(--wine-red);
+        }
+
+        /* Section Styling */
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 54px;
+            color: var(--wine-red-dark);
+            margin-bottom: 30px;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        section {
+            padding: 160px 0;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            color: var(--text-light);
+            font-size: 17px;
+        }
+
+        .about-image {
+            position: relative;
+            padding: 20px;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80%;
+            height: 80%;
+            border: 2px solid var(--gold);
+            z-index: -1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: 30px 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .wine-quote {
+            font-size: 32px;
+            color: var(--wine-red);
+            font-style: italic;
+            margin: 60px 0;
+            padding: 40px;
+            border-top: 1px solid var(--cream-dark);
+            border-bottom: 1px solid var(--cream-dark);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .quote-author {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-style: normal;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 20px;
+            color: var(--gold);
+        }
+
+        /* Meetings Section */
+        .meetings {
+            background-color: var(--cream-dark);
+        }
+
+        .meetings-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .meeting-card {
+            background: white;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .meeting-card:hover {
+            transform: translateY(-15px);
+            border-bottom-color: var(--wine-red);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+        }
+
+        .meeting-card i {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .meeting-card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--wine-red);
+        }
+
+        /* Wine Travel */
+        .wine-travel-accordion {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .travel-item {
+            margin-bottom: 30px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+
+        .travel-header {
+            width: 100%;
+            padding: 40px;
+            background: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 32px;
+            color: var(--wine-red);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .travel-icon {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            color: var(--wine-red);
+        }
+
+        .travel-header[aria-expanded="true"] .travel-icon {
+            transform: rotate(180deg);
+        }
+
+        .travel-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            padding: 0 40px;
+        }
+
+        .travel-content.active {
+            max-height: 10000px;
+            padding: 0 40px 60px;
+        }
+
+        .travel-images-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .travel-image {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .travel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .travel-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Food Pairing */
+        .food-pairing {
+            background-color: var(--cream-dark);
+        }
+
+        /* Wine Terms Section */
+        .wine-terms {
+            background-color: var(--cream);
+        }
+
+        /* Terroir Section */
+        .terroir {
+            background-color: var(--cream-dark);
+        }
+
+        /* Tasting Section */
+        .tasting {
+            background-color: var(--cream);
+        }
+
+        /* Servieren Section */
+        .servieren {
+            background-color: var(--cream-dark);
+        }
+
+        /* Weinfehler Section */
+        .weinfehler {
+            background-color: var(--cream);
+        }
+
+        .terroir-card {
+            background: white;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            margin-bottom: 40px;
+            border-left: 4px solid var(--wine-red);
+        }
+
+        .terroir-climate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .climate-card {
+            background: var(--cream);
+            padding: 30px;
+            border-radius: 5px;
+            border-top: 3px solid var(--gold);
+        }
+
+        .food-pairing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            align-items: start; /* Fix: cards expand individually, not the whole row */
+        }
+
+        .food-card {
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .food-card-header {
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            cursor: pointer;
+        }
+
+        .food-card-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--cream-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: var(--wine-red);
+        }
+
+        .food-card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            padding: 0 40px;
+        }
+
+        .food-card.active .food-card-content {
+            max-height: 1000px;
+            padding: 0 40px 40px;
+        }
+
+        /* Terroir Factor Cards */
+        .terroir-factor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .terroir-factor-card {
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            transition: var(--transition);
+            overflow: hidden;
+            border-top: 4px solid var(--gold);
+        }
+
+        .terroir-factor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .terroir-factor-header {
+            padding: 30px 25px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .terroir-factor-header-top {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .terroir-factor-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--wine-red) 0%, var(--wine-red-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            border-radius: 8px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(92, 26, 33, 0.2);
+        }
+
+        .terroir-factor-title {
+            flex: 1;
+        }
+
+        .terroir-factor-title h4 {
+            font-size: 22px;
+            color: var(--wine-red);
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .terroir-factor-description {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.6;
+            padding-left: 80px;
+            margin: 0;
+        }
+
+        .terroir-factor-chevron {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .terroir-factor-header {
+            position: relative;
+        }
+
+        .terroir-factor-card.active .terroir-factor-chevron {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .terroir-factor-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            padding: 0 25px;
+        }
+
+        .terroir-factor-card.active .terroir-factor-content {
+            max-height: 500px;
+            padding: 0 25px 30px;
+        }
+
+        .terroir-factor-details {
+            padding-top: 20px;
+            border-top: 1px solid var(--cream-dark);
+            margin-top: 20px;
+        }
+
+        .terroir-factor-details p {
+            font-size: 16px;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .terroir-factor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .terroir-factor-description {
+                padding-left: 0;
+                margin-top: 10px;
+            }
+        }
+
+        /* Reviews */
+        .wine-reviews {
+            background-color: var(--wine-red-dark);
+            color: white;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .wine-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .wine-card:hover {
+            transform: translateY(-20px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .wine-image {
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wine-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wine-rating {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+
+        .wine-details {
+            padding: 40px;
+        }
+
+        .wine-details h3 {
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        /* Quotes */
+        .wine-quotes {
+            background-color: white;
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .quote-card {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            transition: var(--transition);
+            border: 1px solid var(--cream-dark);
+        }
+
+        .quote-card:hover {
+            background: var(--wine-red);
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--cream-dark);
+        }
+
+        .contact-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        }
+
+        .contact-item i {
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #888;
+            padding: 120px 0 60px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+            list-style: none;
+        }
+
+        .footer-column ul li a {
+            color: #888;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--gold);
+            padding-left: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--cream);
+            width: 90%;
+            max-width: 800px;
+            padding: 60px;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 40px;
+            cursor: pointer;
+            color: var(--wine-red);
+        }
+
+        /* Section Navigation Buttons */
+        .section-nav-buttons {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .section-nav-buttons.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .section-nav-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--wine-red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 50%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 20px;
+        }
+
+        .section-nav-btn:hover:not(:disabled) {
+            background: var(--wine-red-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .section-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .section-nav-btn:disabled:hover {
+            background: var(--wine-red);
+            transform: none;
+        }
+
+        @media (max-width: 768px) {
+            .section-nav-buttons {
+                bottom: 20px;
+                right: 20px;
+                gap: 12px;
+            }
+
+            .section-nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content h1 { font-size: 54px; }
+            .about-grid { grid-template-columns: 1fr; gap: 60px; }
+            .meetings-cards, .reviews-grid, .contact-details { grid-template-columns: 1fr; }
+            .container { padding: 0 20px; }
+        }
+    </style>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo">Hirzenhainer <span>Weinenthusiasten</span></a>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li class="main-link"><a href="#home">Home</a></li>
+                    <li class="main-link"><a href="#about">Über uns</a></li>
+                    <li class="main-link has-dropdown">
+                        <a href="#" class="dropdown-toggle">Mehr <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#meetings">Treffen</a></li>
+                            <li><a href="#wine-travel">Reisen</a></li>
+                            <li><a href="#food-pairing">Pairing</a></li>
+                            <li><a href="#wine-terms">Begriffe</a></li>
+                            <li><a href="#terroir">Terroir</a></li>
+                            <li><a href="#tasting">Tasting</a></li>
+                            <li><a href="#servieren">Servieren</a></li>
+                            <li><a href="#weinfehler">Weinfehler</a></li>
+                            <li><a href="#reviews">Reviews</a></li>
+                        </ul>
+                    </li>
+                    <li class="main-link"><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="section-subtitle" style="color: var(--cream); opacity: 0.8;">Seit 2023 in Hirzenhain</span>
+            <h1>Genuss in seiner <br>schönsten Form</h1>
+            <p>Zwischen Weinwissen und Wahnsinn – ein exklusiver Kreis leidenschaftlicher Genießer in Hirzenhain.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 40px;">
+                <a href="#reviews" class="btn">Weinempfehlungen</a>
+                <a href="#about" class="btn btn-outline">Über den Club</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Exklusivität & Leidenschaft</span>
+                <h2 class="section-title">Unser Weinclub</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Was 2023 mit einem Glas feinherben Riesling und einer Schnapsidee begann, ist für uns heute ein fester Bestandteil der Hirzenhainer Kultur. Regelmäßige Tastings, festliche Menüs, unerwartete Gäste und immer wieder neue Entdeckungen im Glas prägen unsere Abende.</p>
+                    <p>Bei uns trifft Expertise auf Experimentierfreude, Candlelight auf Korkenzieher und Tiefgang auf Trinkfreude. Ob blauer Wein, Pinot Noir oder einfach nur gute Gesellschaft – bei uns ist <em>everytime Wine o'clock</em>.</p>
+                    <p>Ergänzt wird dieses Selbstverständnis durch das, was uns im Kern ausmacht: Wir sind ein fester Freundeskreis von Gleichgesinnten, der sich aus Genuss, Neugier und Vernunft rund um das Thema Wein zusammengefunden hat. Unser Fokus liegt auf gemeinsamer Verkostung, ehrenamtlichem Austausch und einem angenehmen, ruhigen Miteinander ohne Leistungsdruck, aber mit Anspruch.</p>
+                    <p>Als gewachsener Freundeskreis erweitern wir unseren Kreis für gewöhnlich nicht um neue Mitglieder. Aufgrund der hohen Nachfrage führen wir jedoch eine Warteliste, über die wir gelegentlich einzelne Gäste zu ausgewählten Abenden einladen.</p>
+                    <a href="#" class="btn" id="waitlistBtn" style="margin-top: 20px;">Auf die Warteliste</a>
+                </div>
+                <div class="about-image">
+                    <img src="Bild4.png" alt="Gesellige Weinverkostung">
+                </div>
+            </div>
+            <div class="wine-quote">
+                "Hirzenhain schenkt kräftig ein, Genuss muss schließlich flüssig sein."
+                <span class="quote-author">- Hirzenhainer Weinspruch</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meetings & Tastings Section -->
+    <section class="meetings" id="meetings">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Kultur & Genuss</span>
+                <h2 class="section-title">Treffen & Verkostungen</h2>
+            </div>
+            
+            <div class="meetings-content" style="max-width: 900px; margin: 0 auto;">
+                <p class="meetings-intro" style="font-size: 24px; text-align: center; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif; font-style: italic;">Wir treffen uns alle zwei Monate zu einer gemeinsamen Verkostung.</p>
+                <p class="meetings-description" style="text-align: center; margin-bottom: 50px; color: var(--text-light);">Jeder Abend folgt einem klaren, aber bewusst unkomplizierten Grundkonzept, das leicht verständlich ist und keinen formellen Rahmen benötigt. Im Mittelpunkt stehen der Wein, das gemeinsame Erleben und der Austausch – ohne feste Regeln, aber mit Struktur.</p>
+
+                <div class="meetings-cards">
+                    <div class="meeting-card">
+                        <i class="fas fa-wine-glass-alt"></i>
+                        <h3>Das Konzept</h3>
+                        <p>Ein festgelegtes Wein- oder Themenkonzept, das sich durch den Abend zieht, bildet den roten Faden unserer Verkostung.</p>
+                    </div>
+                    <div class="meeting-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Die Runde</h3>
+                        <p>Eine ruhige, ausgewählte Runde, in der Gespräche Raum haben und ausreichend Zeit für Austausch und Genuss bleibt.</p>
+                    </div>
+                    <div class="meeting-card">
+                        <i class="fas fa-star"></i>
+                        <h3>Special Guests</h3>
+                        <p>Zwei Special Guests, die nicht nur zur Gruppe passen, sondern im Idealfall auch untereinander gut harmonieren.</p>
+                    </div>
+                </div>
+
+                <p class="meetings-guest-selection" style="margin-top: 50px; font-style: italic; text-align: center; color: var(--text-light); padding: 30px; background: white; border-left: 3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.02);">Bei der Auswahl unserer Special Guests legen wir großen Wert darauf, dass die Stimmung am Abend stimmig bleibt. Wir achten bewusst darauf, Persönlichkeiten einzuladen, die sowohl zur Gruppe als auch zueinander passen, damit sich Gespräche natürlich entwickeln und eine angenehme Dynamik entsteht.</p>
+
+                <p class="meetings-conclusion" style="margin-top: 40px; text-align: center; color: var(--text-dark);">So entstehen Abende, die entspannt, seriös und zugleich gesellig sind – mit guten Gesprächen, inhaltlichem Tiefgang und passender Kulinarik. Unser Anspruch ist es, einen Rahmen zu schaffen, in dem sich jeder wohlfühlt und gerne zuhört, mitredet oder einfach genießt – ohne dass es kompliziert oder belehrend wird.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wine Travel Section -->
+    <section class="wine-travel" id="wine-travel">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Entdeckungsreisen</span>
+                <h2 class="section-title">Unsere Weinreisen</h2>
+            </div>
+            <div class="wine-travel-accordion">
+                <!-- Mosel Reise -->
+                <div class="travel-item">
+                    <button class="travel-header" aria-expanded="false" aria-controls="travel-mosel">
+                        <span class="travel-title">Mosel</span>
+                        <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="travel-content" id="travel-mosel">
+                        <p style="margin-bottom: 30px; font-size: 18px;">Unsere erste gemeinsame Weinreise führte uns an die Mosel – eine der traditionsreichsten, aber zugleich spannendsten Weinregionen Deutschlands. Kaum eine andere Region zeigt so eindrucksvoll, wie stark Landschaft, Klima und Handarbeit den Charakter eines Weins prägen.</p>
+                        
+                        <div style="margin-bottom: 40px; background: var(--cream-dark); padding: 40px; border-left: 3px solid var(--gold);">
+                            <h3 style="color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif; font-size: 28px;">Die Mosel ist geprägt durch:</h3>
+                            <ul style="list-style: none; color: var(--text-light);">
+                                <li style="margin-bottom: 15px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> extrem steile Weinberge, die fast ausschließlich in Handarbeit bewirtschaftet werden</li>
+                                <li style="margin-bottom: 15px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Schieferböden, die Wärme speichern und den Weinen ihre typische Mineralität verleihen</li>
+                                <li style="margin-bottom: 15px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> ein eher kühles Klima, das für Frische, lebendige Säure und Eleganz sorgt</li>
+                                <li style="margin-bottom: 15px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> eine beeindruckende Stilvielfalt von trocken bis edelsüß</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-bottom: 40px; font-style: italic; color: var(--text-light);">Moselweine wirken oft leicht und filigran, besitzen aber gleichzeitig Tiefe, Spannung und ein bemerkenswertes Reifepotenzial. Besonders der Riesling zeigt hier eindrucksvoll, wie stark Herkunft und Boden den Charakter eines Weins beeinflussen können.</p>
+
+                        <div class="travel-images-grid">
+                            <div class="travel-image"><img src="Bild1a.jpeg" alt="Eindruck von der Mosel-Reise"></div>
+                            <div class="travel-image"><img src="Bild2a.jpeg" alt="Eindruck von der Mosel-Reise"></div>
+                            <div class="travel-image"><img src="Bild3a.jpeg" alt="Eindruck von der Mosel-Reise"></div>
+                            <div class="travel-image"><img src="Bild4a.jpeg" alt="Eindruck von der Mosel-Reise"></div>
+                        </div>
+                        
+                        <div style="margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+                            <div>
+                                <h4 style="color: var(--wine-red); margin-bottom: 25px; font-size: 24px;">Besuchte Weingüter & Verkostungen</h4>
+                                <ul style="list-style: none; color: var(--text-light);">
+                                    <li style="margin-bottom: 12px; font-weight: 600; color: var(--text-dark);"><i class="fas fa-wine-glass" style="color: var(--gold); margin-right: 15px;"></i> Weingut Rosenbaum</li>
+                                    <li style="margin-bottom: 12px; font-weight: 600; color: var(--text-dark);"><i class="fas fa-wine-glass" style="color: var(--gold); margin-right: 15px;"></i> Weingut Mesenich</li>
+                                    <li style="margin-bottom: 12px; font-weight: 600; color: var(--text-dark);"><i class="fas fa-wine-glass" style="color: var(--gold); margin-right: 15px;"></i> Weingut Servatimüller</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--wine-red); margin-bottom: 25px; font-size: 24px;">Besondere Erlebnisse</h4>
+                                <p style="color: var(--text-light); font-size: 16px; line-height: 1.8;">Während der Reise haben wir nicht nur unterschiedliche Weine, sondern auch verschiedene Menschen, Philosophien und Formen der Verkostung kennengelernt:</p>
+                                <ul style="list-style: none; color: var(--text-light); margin-top: 15px;">
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> klassische Kellerführung & Weinprobe</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> Planwagenfahrt durch die Steillagen</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> Boots-Verkostung auf der „Schoppe 2"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 50px; text-align: center; color: var(--text-dark); font-size: 18px;">Auf allen Stationen wurden wir hervorragend begleitet, haben viel gelernt, außergewöhnliche Weine probiert und intensive, offene Gespräche geführt. Die Weinreise war für uns ein voller Erfolg, weshalb wir uns gut vorstellen können, auch in Zukunft immer wieder Weinreisen anzubieten.</p>
+                        
+                        <div style="margin-top: 40px; padding: 25px; background: rgba(142, 58, 69, 0.05); border-radius: 5px; font-style: italic; font-size: 14px; color: var(--text-light);">
+                            <p>Eine separate Anmeldung für Weinreisen über die Warteliste ist nicht möglich. Die Auswahl erfolgt ausschließlich durch die Verantwortlichen und sehr bewusst. Es kann daher vorkommen, dass man nicht berücksichtigt wird – hierfür bitten wir um Verständnis.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Weitere Reisen können hier hinzugefügt werden -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Pairing Section -->
+    <section class="food-pairing" id="food-pairing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Harmonie der Aromen</span>
+                <h2 class="section-title">Food Pairing</h2>
+            </div>
+            
+            <p style="text-align: center; max-width: 800px; margin: -40px auto 60px; color: var(--text-light);">Entdecken Sie die Kunst der perfekten Wein- und Speisenkombination. Klicken Sie auf die Karten, um mehr zu erfahren.</p>
+
+            <div class="food-pairing-grid">
+                <!-- Grundlegende Tipps -->
+                <div class="food-card">
+                    <div class="food-card-header">
+                        <div class="food-card-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Die Basis</h3>
+                    </div>
+                    <div class="food-card-content">
+                        <p>Food Pairing folgt einfachen Prinzipien: Aromen sollen sich ergänzen oder ausgleichen, nicht gegeneinander arbeiten. Zwei einfache Merksätze helfen fast immer:</p>
+                        <ul style="list-style: none; margin-top: 20px;">
+                            <li style="margin-bottom: 15px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> <strong>Säure schneidet Fett</strong> (macht cremige oder fettige Speisen frischer).</li>
+                            <li style="margin-bottom: 15px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> <strong>Kräftig zu kräftig, fein zu fein</strong> (damit nichts überdeckt wird).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Weißwein -->
+                <div class="food-card">
+                    <div class="food-card-header">
+                        <div class="food-card-icon"><i class="fas fa-glass-cheers"></i></div>
+                        <h3>Weißwein</h3>
+                    </div>
+                    <div class="food-card-content">
+                        <div style="margin-bottom: 30px; border-bottom: 1px solid var(--cream-dark); padding-bottom: 20px;">
+                            <h4 style="color: var(--wine-red); margin-bottom: 10px;">Trockener Riesling</h4>
+                            <p style="font-size: 15px;">Ideal zu Fisch, Geflügel, Spargel und asiatischer Küche. Seine frische Säure wirkt wie ein „Spritzer Zitrone":</p>
+                            <ul style="font-size: 14px; margin-top: 10px; color: var(--text-light);">
+                                <li>• Macht Butter/Sauce Hollandaise leichter.</li>
+                                <li>• Balanciert Würze und Schärfe perfekt aus.</li>
+                                <li>• Überdeckt zarte Speisen nicht.</li>
+                            </ul>
+                        </div>
+                        <div style="margin-bottom: 30px; border-bottom: 1px solid var(--cream-dark); padding-bottom: 20px;">
+                            <h4 style="color: var(--wine-red); margin-bottom: 10px;">Burgunder</h4>
+                            <p style="font-size: 15px;">Grau- oder Weißburgunder passen hervorragend zu Pasta mit hellen Saucen und Pilzgerichten:</p>
+                            <ul style="font-size: 14px; margin-top: 10px; color: var(--text-light);">
+                                <li>• Weniger „spitze" Säure als Riesling.</li>
+                                <li>• Nussige, mild-fruchtige Aromen schmiegen sich an Pasta an.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--wine-red); margin-bottom: 10px;">Aromatische Weine</h4>
+                            <p style="font-size: 15px;">Muskateller oder Gewürztraminer zu würzigen Gerichten und orientalischer Küche.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rotwein -->
+                <div class="food-card">
+                    <div class="food-card-header">
+                        <div class="food-card-icon"><i class="fas fa-wine-bottle"></i></div>
+                        <h3>Rotwein</h3>
+                    </div>
+                    <div class="food-card-content">
+                        <div style="margin-bottom: 30px; border-bottom: 1px solid var(--cream-dark); padding-bottom: 20px;">
+                            <h4 style="color: var(--wine-red); margin-bottom: 10px;">Fruchtbetont (z.B. Spätburgunder)</h4>
+                            <p style="font-size: 15px;">Perfekt zu mediterranen Gerichten und Pizza. Harmoniert gut mit der Säure von Tomatensaucen.</p>
+                        </div>
+                        <div style="margin-bottom: 30px; border-bottom: 1px solid var(--cream-dark); padding-bottom: 20px;">
+                            <h4 style="color: var(--wine-red); margin-bottom: 10px;">Kräftig (z.B. Primitivo)</h4>
+                            <p style="font-size: 15px;">Begleitet kräftiges Grillfleisch und würzige Schmorgerichte. Braucht Druck und Fülle gegen Röstaromen.</p>
+                        </div>
+                        <div style="background: var(--cream-dark); padding: 20px; border-left: 2px solid var(--gold);">
+                            <h4 style="font-size: 16px; margin-bottom: 10px;">Pasta-Regel:</h4>
+                            <p style="font-size: 14px;">Hell & cremig → Burgunder.<br>Tomatig & würzig → fruchtbetonter Rotwein.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schaumwein -->
+                <div class="food-card">
+                    <div class="food-card-header">
+                        <div class="food-card-icon"><i class="fas fa-glass-cheers"></i></div>
+                        <h3>Schaumwein</h3>
+                    </div>
+                    <div class="food-card-content">
+                        <p style="font-size: 15px;">Aperitif, leichte Vorspeisen, Sushi oder salzige Snacks. Die Perlage erfrischt den Gaumen.</p>
+                        <ul style="font-size: 14px; margin-top: 10px; color: var(--text-light); list-style: none;">
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--gold); margin-right: 10px;"></i> Aperitif (Gaumen wecken)</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--gold); margin-right: 10px;"></i> Sushi & Sashimi</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--gold); margin-right: 10px;"></i> Salzige Snacks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Süßwein -->
+                <div class="food-card">
+                    <div class="food-card-header">
+                        <div class="food-card-icon"><i class="fas fa-cake-candles"></i></div>
+                        <h3>Süßwein</h3>
+                    </div>
+                    <div class="food-card-content">
+                        <p style="font-size: 15px;">Desserts, Blauschimmelkäse oder als krönender Abschluss eines feinen Menüs.</p>
+                        <ul style="font-size: 14px; margin-top: 10px; color: var(--text-light); list-style: none;">
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--gold); margin-right: 10px;"></i> Schokoladen-Desserts</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--gold); margin-right: 10px;"></i> Kräftiger Blauschimmelkäse</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--gold); margin-right: 10px;"></i> Fruchtige Torten</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 60px; font-style: italic; color: var(--text-light); font-size: 15px;">👉 Alle Pairings sind Empfehlungen. Geschmack ist individuell – erlaubt ist, was schmeckt.</p>
+        </div>
+    </section>
+
+    <!-- Wine Terms Section -->
+    <section class="wine-terms" id="wine-terms">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Wissen & Verständnis</span>
+                <h2 class="section-title">Wichtige Begriffe rund um Wein</h2>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <p style="text-align: center; font-size: 18px; color: var(--text-light); margin-bottom: 60px;">Gerade für Einsteiger wirken viele Weinbegriffe zunächst abstrakt. Dabei lassen sich die meisten sehr gut schmecken, fühlen oder riechen. Zwei der wichtigsten und am häufigsten genannten Begriffe sind Sulfite und Gerbstoffe (Tannine).</p>
+
+                <div class="wine-travel-accordion">
+                    <!-- Sulfite Accordion -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="term-sulfite">
+                            <span class="travel-title">Sulfite</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="term-sulfite">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8;">Sulfite schützen Wein vor Oxidation und unerwünschten Mikroorganismen. Sie entstehen zum Teil natürlich bei der Gärung, werden aber oft zusätzlich in kleinen Mengen zugesetzt, um den Wein haltbar und stabil zu machen.</p>
+                            
+                            <div style="margin: 30px 0;">
+                                <h4 style="font-size: 22px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Wofür sind Sulfite wichtig?</h4>
+                                <ul style="list-style: none; color: var(--text-light);">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Sie verhindern, dass Wein zu schnell altert oder „kippt"</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Sie schützen vor Oxidation (ähnlich wie Zitronensaft bei aufgeschnittenem Obst)</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Sie sorgen dafür, dass Wein transport- und lagerfähig bleibt</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin: 30px 0;">
+                                <h4 style="font-size: 22px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Wie erkennt man Sulfite geschmacklich?</h4>
+                                <p style="font-size: 17px; color: var(--text-light); margin-bottom: 15px; line-height: 1.8;">Sulfite haben keinen eigenen Geschmack, können sich aber bemerkbar machen, wenn sie in höherer Menge vorhanden sind:</p>
+                                <ul style="list-style: none; color: var(--text-light);">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><span style="color: var(--gold); position: absolute; left: 0; font-weight: bold;">•</span> leicht stechender Eindruck in der Nase</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><span style="color: var(--gold); position: absolute; left: 0; font-weight: bold;">•</span> der Wein wirkt manchmal etwas verschlossen oder kantig</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><span style="color: var(--gold); position: absolute; left: 0; font-weight: bold;">•</span> häufig eher bei sehr jungen oder stark geschützten Weinen</li>
+                                </ul>
+                            </div>
+
+                            <div style="background: var(--cream-dark); padding: 25px; border-left: 3px solid var(--gold); margin-top: 30px; border-radius: 5px;">
+                                <p style="font-size: 16px; color: var(--text-dark); margin: 0; font-weight: 600;"><strong>Wichtig:</strong> Ein trockener Mund kommt nicht von Sulfiten – das ist ein häufiger Irrtum. Auch Kopfschmerzen werden meist nicht durch Sulfite verursacht, sondern eher durch Alkohol, Dehydrierung oder Histamine.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tannine Accordion -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="term-tannine">
+                            <span class="travel-title">Gerbstoffe (Tannine)</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="term-tannine">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 20px; line-height: 1.8;">Gerbstoffe, auch Tannine genannt, stammen aus:</p>
+                            <ul style="list-style: none; color: var(--text-light); margin-bottom: 30px;">
+                                <li style="margin-bottom: 10px; position: relative; padding-left: 30px;"><i class="fas fa-wine-bottle" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> den Schalen, Kernen und Stielen der Trauben</li>
+                                <li style="margin-bottom: 10px; position: relative; padding-left: 30px;"><i class="fas fa-cube" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> dem Holzfass (z. B. Barrique)</li>
+                            </ul>
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8;">Sie sind vor allem in Rotweinen enthalten, da diese mit Schalen vergoren werden.</p>
+                            
+                            <div style="margin: 30px 0;">
+                                <h4 style="font-size: 22px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Wofür sind Gerbstoffe wichtig?</h4>
+                                <ul style="list-style: none; color: var(--text-light);">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Sie geben dem Wein Struktur und Körper</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Sie machen Rotwein lagerfähig</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Sie sorgen für Tiefe und Spannkraft</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin: 30px 0;">
+                                <h4 style="font-size: 22px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Wie erkennt man Gerbstoffe geschmacklich?</h4>
+                                <p style="font-size: 17px; color: var(--text-light); margin-bottom: 15px; line-height: 1.8;">Gerbstoffe lassen sich sehr gut fühlen:</p>
+                                <ul style="list-style: none; color: var(--text-light);">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><span style="color: var(--gold); position: absolute; left: 0; font-weight: bold;">•</span> der Mund fühlt sich nach dem Schlucken trocken an</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><span style="color: var(--gold); position: absolute; left: 0; font-weight: bold;">•</span> ein pelziges oder zusammenziehendes Gefühl auf Zunge und Zahnfleisch</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><span style="color: var(--gold); position: absolute; left: 0; font-weight: bold;">•</span> ähnlich wie bei starkem schwarzen Tee oder unreifer Banane</li>
+                                </ul>
+                            </div>
+
+                            <div style="background: rgba(197, 160, 89, 0.1); padding: 25px; border-left: 3px solid var(--gold); margin-top: 30px; border-radius: 5px;">
+                                <p style="font-size: 16px; color: var(--text-dark); margin: 0;"><strong>👉 Ein einfacher Test:</strong> Wenn du nach dem Schlucken das Gefühl hast, dass dir „der Speichel weggezogen wird", liegt das an Gerbstoffen, nicht an Sulfiten.</p>
+                            </div>
+
+                            <div style="margin: 30px 0;">
+                                <h4 style="font-size: 22px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Warum sind sie manchmal unangenehm?</h4>
+                                <ul style="list-style: none; color: var(--text-light);">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><span style="color: var(--gold); position: absolute; left: 0; font-weight: bold;">•</span> Bei jungen Weinen können Tannine noch rau und kantig wirken</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><span style="color: var(--gold); position: absolute; left: 0; font-weight: bold;">•</span> Mit Reife oder Luft (Dekantieren) werden sie oft weicher und runder</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terroir Section -->
+    <section class="terroir" id="terroir">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Boden & Charakter</span>
+                <h2 class="section-title">Terroir</h2>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <p style="text-align: center; font-size: 18px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8;">Terroir beschreibt das Zusammenspiel aus Boden, Klima, Lage, Mikroklima und menschlicher Arbeit.</p>
+                <p style="text-align: center; font-size: 17px; color: var(--text-dark); margin-bottom: 30px; font-style: italic;">Kurz gesagt: Terroir ist der Grund, warum derselbe Rebstock an zwei verschiedenen Orten völlig unterschiedlich schmeckt – obwohl es die gleiche Rebsorte ist.</p>
+                <p style="text-align: center; font-size: 18px; color: var(--wine-red); margin-bottom: 60px; font-weight: 500; font-family: 'Cormorant Garamond', serif;">Man kann sich Terroir wie den Charakter eines Ortes im Glas vorstellen.</p>
+
+                <div class="wine-travel-accordion">
+                    <!-- Was gehört zum Terroir -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="terroir-components">
+                            <span class="travel-title">Was gehört alles zum Terroir?</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="terroir-components">
+                            <div class="terroir-factor-grid">
+                                <!-- Boden -->
+                                <div class="terroir-factor-card">
+                                    <div class="terroir-factor-header">
+                                        <div class="terroir-factor-header-top">
+                                            <div class="terroir-factor-icon">
+                                                <i class="fas fa-mountain"></i>
+                                            </div>
+                                            <div class="terroir-factor-title">
+                                                <h4>Boden</h4>
+                                            </div>
+                                        </div>
+                                        <p class="terroir-factor-description">Schiefer, Kalk, Sand, Lehm – die Basis des Terroirs</p>
+                                        <span class="terroir-factor-chevron"><i class="fas fa-chevron-down"></i></span>
+                                    </div>
+                                    <div class="terroir-factor-content">
+                                        <div class="terroir-factor-details">
+                                            <p>Die Beschaffenheit des Bodens beeinflusst maßgeblich, wie die Reben Nährstoffe aufnehmen. Verschiedene Böden wie Schiefer, Kalk, Sand oder Lehm geben dem Wein unterschiedliche mineralische Noten und Texturen. Ein steiniger Boden kann dem Wein mineralische Aromen verleihen, während ein Lehmboden oft zu voluminöseren, weicheren Weinen führt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Klima -->
+                                <div class="terroir-factor-card">
+                                    <div class="terroir-factor-header">
+                                        <div class="terroir-factor-header-top">
+                                            <div class="terroir-factor-icon">
+                                                <i class="fas fa-sun"></i>
+                                            </div>
+                                            <div class="terroir-factor-title">
+                                                <h4>Klima</h4>
+                                            </div>
+                                        </div>
+                                        <p class="terroir-factor-description">Warm oder kühl, viel oder wenig Sonne</p>
+                                        <span class="terroir-factor-chevron"><i class="fas fa-chevron-down"></i></span>
+                                    </div>
+                                    <div class="terroir-factor-content">
+                                        <div class="terroir-factor-details">
+                                            <p>Das Großklima einer Region bestimmt, ob die Trauben genug Zeit haben, vollständig zu reifen. In warmen Klimazonen entstehen üppige, reife Weine mit höherem Alkoholgehalt. Kühle Klimazonen hingegen produzieren oft frischere, säurebetontere Weine mit zarteren Fruchtnoten. Die Balance zwischen Sonnenstunden, Niederschlag und Temperaturverlauf prägt den Charakter des Weins entscheidend.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Lage -->
+                                <div class="terroir-factor-card">
+                                    <div class="terroir-factor-header">
+                                        <div class="terroir-factor-header-top">
+                                            <div class="terroir-factor-icon">
+                                                <i class="fas fa-map-marked-alt"></i>
+                                            </div>
+                                            <div class="terroir-factor-title">
+                                                <h4>Lage</h4>
+                                            </div>
+                                        </div>
+                                        <p class="terroir-factor-description">Hang, Höhe, Ausrichtung zur Sonne</p>
+                                        <span class="terroir-factor-chevron"><i class="fas fa-chevron-down"></i></span>
+                                    </div>
+                                    <div class="terroir-factor-content">
+                                        <div class="terroir-factor-details">
+                                            <p>Die geografische Position der Rebzeile – ob in einer Hanglage, auf welcher Höhe und mit welcher Ausrichtung zur Sonne – hat enormen Einfluss auf die Traubenqualität. Steilhänge bieten bessere Drainage und mehr Sonneneinstrahlung. Die Höhenlage beeinflusst die Temperaturdifferenz zwischen Tag und Nacht, was wiederum die Aromenentwicklung beeinflusst. Eine Südausrichtung maximiert die Sonneneinstrahlung und fördert die Reife.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Mikroklima -->
+                                <div class="terroir-factor-card">
+                                    <div class="terroir-factor-header">
+                                        <div class="terroir-factor-header-top">
+                                            <div class="terroir-factor-icon">
+                                                <i class="fas fa-wind"></i>
+                                            </div>
+                                            <div class="terroir-factor-title">
+                                                <h4>Mikroklima</h4>
+                                            </div>
+                                        </div>
+                                        <p class="terroir-factor-description">Wind, Nähe zu Flüssen, Wärmespeicherung</p>
+                                        <span class="terroir-factor-chevron"><i class="fas fa-chevron-down"></i></span>
+                                    </div>
+                                    <div class="terroir-factor-content">
+                                        <div class="terroir-factor-details">
+                                            <p>Das Mikroklima beschreibt die lokalen klimatischen Bedingungen direkt im Weinberg. Wind kann kühlend wirken und die Reifung verlangsamen, während die Nähe zu Flüssen oder Seen für ausgleichende Temperaturen sorgt. Steine oder Felsen können Wärme speichern und in der Nacht abgeben, was die Reifung unterstützt. Diese kleinteiligen Unterschiede können innerhalb derselben Appellation zu deutlich unterschiedlichen Weinen führen.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Menschliche Arbeit -->
+                                <div class="terroir-factor-card">
+                                    <div class="terroir-factor-header">
+                                        <div class="terroir-factor-header-top">
+                                            <div class="terroir-factor-icon">
+                                                <i class="fas fa-hands"></i>
+                                            </div>
+                                            <div class="terroir-factor-title">
+                                                <h4>Menschliche Arbeit</h4>
+                                            </div>
+                                        </div>
+                                        <p class="terroir-factor-description">Lesezeitpunkt, Ertrag, Ausbau</p>
+                                        <span class="terroir-factor-chevron"><i class="fas fa-chevron-down"></i></span>
+                                    </div>
+                                    <div class="terroir-factor-content">
+                                        <div class="terroir-factor-details">
+                                            <p>Die Entscheidungen des Winzers sind ein entscheidender Teil des Terroirs. Der Zeitpunkt der Lese beeinflusst den Reifegrad und damit das Aromenspektrum. Ein niedriger Ertrag führt oft zu konzentrierteren, intensiveren Weinen. Der Ausbau – ob im Edelstahltank, im Holzfass oder in Beton – formt den finalen Charakter des Weins und interpretiert das natürliche Terroir auf eine bestimmte Art und Weise.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="margin-top: 40px; font-size: 17px; color: var(--text-dark); line-height: 1.8; text-align: center;">All diese Faktoren wirken zusammen und prägen, wie ein Wein riecht, schmeckt und sich anfühlt.</p>
+                        </div>
+                    </div>
+
+                    <!-- Wie schmeckt man Terroir -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="terroir-taste">
+                            <span class="travel-title">Wie schmeckt man Terroir? </span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="terroir-taste">
+                            <div class="terroir-climate-grid">
+                                <!-- Steiniger Boden -->
+                                <div class="climate-card">
+                                    <h4 style="font-size: 24px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Steiniger Boden → mineralisch</h4>
+                                    <ul style="list-style: none; color: var(--text-light); font-size: 15px; line-height: 1.8; margin-bottom: 15px;">
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Geschmackseindruck:</strong> Kreide, Feuerstein, nasser Stein</li>
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Gefühl:</strong> klar, präzise, oft „salzig" wirkend</li>
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Typische Beschreibung:</strong> mineralisch, straff, kühl</li>
+                                    </ul>
+                                    <p style="font-size: 14px; color: var(--text-light); font-style: italic; margin: 0;">Oft bei Weinen von Schiefer- oder Kalkböden</p>
+                                </div>
+
+                                <!-- Kühles Klima -->
+                                <div class="climate-card">
+                                    <h4 style="font-size: 24px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Kühles Klima → frisch & säurebetont</h4>
+                                    <ul style="list-style: none; color: var(--text-light); font-size: 15px; line-height: 1.8; margin-bottom: 15px;">
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Geschmackseindruck:</strong> Zitrus, grüner Apfel, Limette</li>
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Gefühl:</strong> macht den Mund „wässrig", sehr erfrischend</li>
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Typische Beschreibung:</strong> frisch, lebendig, knackig</li>
+                                    </ul>
+                                    <p style="font-size: 14px; color: var(--text-light); font-style: italic; margin: 0;">Häufig in nördlichen Regionen oder höheren Lagen</p>
+                                </div>
+
+                                <!-- Warmes Klima -->
+                                <div class="climate-card">
+                                    <h4 style="font-size: 24px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Warmes Klima → reif & üppig</h4>
+                                    <ul style="list-style: none; color: var(--text-light); font-size: 15px; line-height: 1.8; margin-bottom: 15px;">
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Geschmackseindruck:</strong> reife Früchte, Pfirsich, dunkle Beeren</li>
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Gefühl:</strong> weich, rund, manchmal leicht süßlich</li>
+                                        <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong>Typische Beschreibung:</strong> voll, warm, üppig</li>
+                                    </ul>
+                                    <p style="font-size: 14px; color: var(--text-light); font-style: italic; margin: 0;">Typisch für sonnige, südliche Regionen</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wie beschreibt man Terroir -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="terroir-describe">
+                            <span class="travel-title">Wie beschreibt man Terroir im Glas?</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="terroir-describe">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 25px; line-height: 1.8;">Stell dir beim Probieren einfache Fragen:</p>
+                            <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8; margin-bottom: 40px;">
+                                <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Wirkt der Wein kühl oder warm?</li>
+                                <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Ist er eher frisch und leicht oder rund und kräftig?</li>
+                                <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Fühlt er sich klar und präzise an oder weich und breit?</li>
+                            </ul>
+                            <div style="background: var(--cream-dark); padding: 30px; border-left: 3px solid var(--gold); border-radius: 5px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Beispiele für einfache Beschreibungen:</h4>
+                                <ul style="list-style: none; color: var(--text-dark); font-size: 16px; line-height: 1.8;">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">→</span> „Wirkt sehr frisch und mineralisch, eher kühl."</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">→</span> „Reife Frucht, weich und rund – wirkt sonnig."</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">→</span> „Straff, klar, wenig Frucht, dafür viel Spannung."</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wichtig zu wissen -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="terroir-important">
+                            <span class="travel-title">Wichtig zu wissen</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="terroir-important">
+                            <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 20px; line-height: 1.8; font-weight: 500;">Terroir bedeutet nicht, dass ein Wein besser oder schlechter ist.<br>Es erklärt lediglich, warum er so schmeckt, wie er schmeckt.</p>
+                            <p style="font-size: 17px; color: var(--text-dark); margin: 0; line-height: 1.8;">Zwei Rieslinge können komplett unterschiedlich wirken – und beide großartig sein.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tasting Section -->
+    <section class="tasting" id="tasting">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Technik & Praxis</span>
+                <h2 class="section-title">Wie läuft ein Tasting ab?</h2>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <p style="text-align: center; font-size: 18px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8;">Ein Weintasting folgt immer dem gleichen, einfachen Ablauf: <strong style="color: var(--wine-red);">Sehen → Riechen → Schmecken</strong>.</p>
+                <p style="text-align: center; font-size: 17px; color: var(--text-dark); margin-bottom: 40px; line-height: 1.8;">Wenn man diesen Ablauf einhält und die richtigen Begriffe kennt, wirkt man schnell sicher – auch als Einsteiger.</p>
+
+                <div style="text-align: center; margin: 40px auto 60px; max-width: 500px;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+                        <img src="WeinBild.jpeg" alt="Wein Tasting" style="width: 100%; height: auto; border-radius: 5px; display: block;">
+                        <p style="font-size: 12px; color: var(--text-light); margin-top: 15px; margin-bottom: 0; font-style: italic;">Quelle: <a href="https://www.aromaster.com" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); text-decoration: underline;">www.aromaster.com</a></p>
+                    </div>
+                </div>
+
+                <div class="wine-travel-accordion">
+                    <!-- 1. Sehen -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="tasting-sehen">
+                            <span class="travel-title">1. Sehen – die Farbe beurteilen</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="tasting-sehen">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 25px; line-height: 1.8;">Zuerst schaut man sich den Wein im Glas an, idealerweise vor einem hellen Hintergrund.</p>
+                            
+                            <h4 style="font-size: 22px; color: var(--wine-red); margin-bottom: 20px; margin-top: 30px; font-family: 'Cormorant Garamond', serif;">Typische Farbskalen:</h4>
+                            
+                            <div style="margin-bottom: 30px;">
+                                <h5 style="font-size: 19px; color: var(--text-dark); margin-bottom: 15px; font-weight: 600;">Weißwein:</h5>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px; font-style: italic;">Strohgelb → Hellgelb → Goldgelb</p>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 16px; line-height: 1.8;">
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">Strohgelb:</strong> meist jung, frisch</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">Goldgelb:</strong> reifer, oft gehaltvoller oder im Holz ausgebaut</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h5 style="font-size: 19px; color: var(--text-dark); margin-bottom: 15px; font-weight: 600;">Rosé:</h5>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px; font-style: italic;">Lachsfarben → Zartrosa → Kirschrosa</p>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 16px; line-height: 1.8;">
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">Hell & lachsfarben:</strong> leicht, frisch</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">Kräftiger roséfarben:</strong> mehr Struktur, mehr Geschmack</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h5 style="font-size: 19px; color: var(--text-dark); margin-bottom: 15px; font-weight: 600;">Rotwein:</h5>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px; font-style: italic;">Rubinrot → Dunkelrot → Granatrot</p>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 16px; line-height: 1.8;">
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">Rubinrot:</strong> eher jung, fruchtbetont</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">Granatrot:</strong> reifer, entwickelter Wein</li>
+                                </ul>
+                            </div>
+
+                            <div style="background: var(--cream-dark); padding: 25px; border-left: 3px solid var(--gold); border-radius: 5px; margin-top: 30px;">
+                                <p style="font-size: 16px; color: var(--text-dark); margin: 0; line-height: 1.8;"><strong style="color: var(--wine-red);">Profi-Tipp:</strong> Man kann ruhig sagen: „Die Farbe wirkt recht klar und eher jugendlich." Das zeigt Aufmerksamkeit, ohne zu übertreiben.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Riechen -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="tasting-riechen">
+                            <span class="travel-title">2. Riechen – das Bouquet erfassen</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="tasting-riechen">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 25px; line-height: 1.8;">Jetzt kommt die Nase. Das Glas leicht schwenken und riechen.</p>
+                            <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 30px; line-height: 1.8;">Beim Riechen beschreibt man nicht perfekt, sondern ehrlich. Es geht um Eindrücke, nicht um richtige oder falsche Antworten.</p>
+
+                            <h4 style="font-size: 22px; color: var(--wine-red); margin-bottom: 25px; font-family: 'Cormorant Garamond', serif;">Typische Aromengruppen:</h4>
+                            
+                            <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8; margin-bottom: 30px;">
+                                <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> <strong style="color: var(--text-dark);">Frucht:</strong> Apfel, Zitrus, Beeren, Pfirsich</li>
+                                <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> <strong style="color: var(--text-dark);">Blumen:</strong> Blüten, Holunder, Veilchen</li>
+                                <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> <strong style="color: var(--text-dark);">Kräuter & Würze:</strong> Gras, Kräuter, Pfeffer</li>
+                                <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> <strong style="color: var(--text-dark);">Holz & Reife:</strong> Vanille, Toast, Nuss, Tabak</li>
+                            </ul>
+
+                            <div style="background: var(--cream-dark); padding: 25px; border-left: 3px solid var(--gold); border-radius: 5px;">
+                                <p style="font-size: 16px; color: var(--text-dark); margin-bottom: 15px; line-height: 1.8;"><strong style="color: var(--wine-red);">Profi-Tipp:</strong> Statt ein einzelnes Aroma festzunageln, lieber sagen:</p>
+                                <ul style="list-style: none; color: var(--text-dark); font-size: 16px; line-height: 1.8; margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">→</span> „Wirkt fruchtbetont, eher frisch als reif."</li>
+                                    <li style="margin-bottom: 0; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">→</span> „Ich nehme eine leichte Würze und etwas Holz wahr."</li>
+                                </ul>
+                                <p style="font-size: 16px; color: var(--text-dark); margin-top: 15px; margin-bottom: 0; line-height: 1.8;">Das klingt souverän und offen.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Schmecken -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="tasting-schmecken">
+                            <span class="travel-title">3. Schmecken – was passiert im Mund?</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="tasting-schmecken">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8;">Jetzt nimmt man einen Schluck und lässt den Wein kurz im Mund wirken.</p>
+
+                            <h4 style="font-size: 22px; color: var(--wine-red); margin-bottom: 25px; font-family: 'Cormorant Garamond', serif;">Achte besonders auf diese Punkte:</h4>
+
+                            <div style="margin-bottom: 30px;">
+                                <h5 style="font-size: 19px; color: var(--text-dark); margin-bottom: 15px; font-weight: 600;">Süße & Säure</h5>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 16px; line-height: 1.8;">
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">Süße:</strong> bleibt etwas Zucker spürbar?</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">Säure:</strong> macht der Wein den Mund „wässrig" und frisch?</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h5 style="font-size: 19px; color: var(--text-dark); margin-bottom: 15px; font-weight: 600;">Körper</h5>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px;">Wie füllig fühlt sich der Wein an?</p>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 16px; line-height: 1.8;">
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">leicht</strong> (wirkt schlank, fast tänzelnd)</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">mittel</strong> (angenehm rund)</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">kräftig</strong> (füllig, fast „schwer" im Mund)</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h5 style="font-size: 19px; color: var(--text-dark); margin-bottom: 15px; font-weight: 600;">Länge</h5>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px;">Wie lange bleibt der Geschmack nach dem Schlucken?</p>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 16px; line-height: 1.8;">
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">kurz:</strong> schnell weg</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">mittel:</strong> einige Sekunden</li>
+                                    <li style="margin-bottom: 10px; position: relative; padding-left: 25px;"><span style="color: var(--gold); position: absolute; left: 0;">•</span> <strong style="color: var(--text-dark);">lang:</strong> bleibt deutlich präsent</li>
+                                </ul>
+                            </div>
+
+                            <div style="background: var(--cream-dark); padding: 25px; border-left: 3px solid var(--gold); border-radius: 5px;">
+                                <p style="font-size: 16px; color: var(--text-dark); margin: 0; line-height: 1.8;"><strong style="color: var(--wine-red);">Profi-Tipp:</strong> „Der Wein hat einen mittleren Körper und einen angenehmen, sauberen Abgang." Das ist eine sehr sichere Aussage.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wichtige Begriffe -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="tasting-begriffe">
+                            <span class="travel-title">Wichtige Begriffe – einfach erklärt (und professionell klingend)</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="tasting-begriffe">
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 12px; font-family: 'Cormorant Garamond', serif;">Bouquet</h4>
+                                <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 10px; line-height: 1.8;">= der Gesamteindruck der Nase</p>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px; line-height: 1.8;">Alles, was du riechst, zusammengefasst</p>
+                                <p style="font-size: 16px; color: var(--text-dark); font-style: italic; margin: 0;">„Ein eher fruchtiges Bouquet."</p>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 12px; font-family: 'Cormorant Garamond', serif;">Struktur</h4>
+                                <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 10px; line-height: 1.8;">= wie gut Säure, Alkohol, Frucht und Gerbstoffe zusammenpassen</p>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px; line-height: 1.8;">„Gut strukturierter Wein" heißt: nichts wirkt chaotisch.</p>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 12px; font-family: 'Cormorant Garamond', serif;">Abgang</h4>
+                                <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 10px; line-height: 1.8;">= der Geschmack nach dem Schlucken</p>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px; line-height: 1.8;">„Kurzer Abgang" oder „langer, sauberer Abgang"</p>
+                            </div>
+
+                            <div style="margin-bottom: 0;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 12px; font-family: 'Cormorant Garamond', serif;">Balance</h4>
+                                <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 10px; line-height: 1.8;">= nichts sticht negativ hervor</p>
+                                <p style="font-size: 16px; color: var(--text-light); margin-bottom: 15px; line-height: 1.8;">weder zu sauer, noch zu bitter, noch zu alkoholisch</p>
+                                <p style="font-size: 16px; color: var(--text-dark); font-style: italic; margin: 0;">„Sehr ausgewogen" ist immer ein gutes Urteil.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wichtiger Hinweis -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="tasting-hinweis">
+                            <span class="travel-title">Zum Schluss ein wichtiger Hinweis</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="tasting-hinweis">
+                            <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 25px; line-height: 1.8;">Man muss nicht alles exakt benennen, um kompetent zu wirken. Viel wichtiger ist, ruhig zu bleiben und Eindrücke sauber zu formulieren.</p>
+                            <div style="background: var(--cream-dark); padding: 30px; border-left: 3px solid var(--gold); border-radius: 5px;">
+                                <p style="font-size: 17px; color: var(--text-dark); margin: 0; line-height: 1.8;"><strong style="color: var(--wine-red);">Wer sagt:</strong> „Wirkt frisch, gut balanciert und angenehm zu trinken" liegt fast nie falsch – und klingt ganz sicher nicht wie ein Anfänger.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servieren Section -->
+    <section class="servieren" id="servieren">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Service & Präsentation</span>
+                <h2 class="section-title">Servieren – Temperatur & Glasform</h2>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="wine-travel-accordion">
+                    <!-- Weißwein -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="servieren-weisswein">
+                            <span class="travel-title">Weißwein</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="servieren-weisswein">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 20px; line-height: 1.8;">Weißwein wird idealerweise bei <strong style="color: var(--text-dark);">8–10 °C</strong> serviert.</p>
+                            <p style="font-size: 17px; color: var(--text-dark); line-height: 1.8;">Verwendet wird meist ein schlankes Glas, das die Frische und Säure bündelt. So wirkt der Wein lebendig, klar und nicht zu breit im Geschmack.</p>
+                        </div>
+                    </div>
+
+                    <!-- Rotwein -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="servieren-rotwein">
+                            <span class="travel-title">Rotwein</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="servieren-rotwein">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 20px; line-height: 1.8;">Rotwein entfaltet sich am besten bei <strong style="color: var(--text-dark);">16–18 °C</strong>.</p>
+                            <p style="font-size: 17px; color: var(--text-dark); line-height: 1.8;">Ein bauchiges Glas gibt dem Wein mehr Luft, wodurch sich Aromen und Struktur besser entwickeln können. Gerade bei kräftigeren Rotweinen ist das entscheidend für die Aromatik.</p>
+                        </div>
+                    </div>
+
+                    <!-- Schaumwein -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="servieren-schaumwein">
+                            <span class="travel-title">Schaumwein</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="servieren-schaumwein">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 20px; line-height: 1.8;">Schaumwein sollte gut gekühlt bei <strong style="color: var(--text-dark);">6–8 °C</strong> ins Glas kommen.</p>
+                            <p style="font-size: 17px; color: var(--text-dark); line-height: 1.8;">Ideal ist eine Tulpenform, da sie sowohl die Perlage (das Mousseux) als auch die Aromen besser zur Geltung bringt als eine klassische flache Schale.</p>
+                        </div>
+                    </div>
+
+                    <!-- Süßwein -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="servieren-suesswein">
+                            <span class="travel-title">Süßwein</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="servieren-suesswein">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 20px; line-height: 1.8;">Süßwein trinkt man ebenfalls bei <strong style="color: var(--text-dark);">8–10 °C</strong>, meist aus einem kleineren Glas.</p>
+                            <p style="font-size: 17px; color: var(--text-dark); line-height: 1.8;">Dadurch bleiben Süße und Aromen konzentriert, ohne schwer oder klebrig zu wirken.</p>
+                        </div>
+                    </div>
+
+                    <!-- Hinweis zur Praxis -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="servieren-hinweis">
+                            <span class="travel-title">Hinweis zur Praxis</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="servieren-hinweis">
+                            <p style="font-size: 17px; color: var(--text-dark); line-height: 1.8;">Heute wird häufig ein universelles Weinglas für alle Weinarten genutzt. Dieses wird zwischen den Weinen ausgespült und vor dem Einschenken oft mit einem kleinen Schluck des neuen Weins „vorgespült", um Fremdaromen zu vermeiden.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weinfehler Section -->
+    <section class="weinfehler" id="weinfehler">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Qualität & Erkennung</span>
+                <h2 class="section-title">Weinfehler erkennen</h2>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <p style="text-align: center; font-size: 18px; color: var(--text-light); margin-bottom: 60px; line-height: 1.8;">Nicht jeder Wein, der ungewohnt oder „komisch" schmeckt, ist automatisch schlecht. Es gibt aber typische Weinfehler, die man erkennen kann – vor allem über Geruch und Geschmack.</p>
+
+                <div class="wine-travel-accordion">
+                    <!-- Gekorkt -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="fehler-gekorkt">
+                            <span class="travel-title">Gekorkt</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="fehler-gekorkt">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8;">Ein gekorkter Wein ist nicht verdorben, sondern durch einen fehlerhaften Naturkork beeinträchtigt.</p>
+
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Woran erkennt man ihn?</h4>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8;">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Geruch nach nassem Karton, feuchtem Keller oder Moder</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> wirkt dumpf, muffig und wenig lebendig</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> die Frucht ist stark gedämpft oder komplett verschwunden</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Wie schmeckt ein gekorkter Wein?</h4>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8;">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> flach und leblos</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> kaum Frucht, manchmal bitter</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> kein klarer Abgang, eher stumpf</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 15px; font-family: 'Cormorant Garamond', serif;">Ursache</h4>
+                                <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 20px; line-height: 1.8;">Ein fehlerhafter Naturkork – hat nichts mit Qualität oder Preis des Weins zu tun.</p>
+                            </div>
+
+                            <div style="margin-bottom: 0;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Was tun?</h4>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8;">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> im Restaurant oder beim Weingut ansprechen und reklamieren</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> zu Hause: vergleichen (riecht ein zweites Glas genauso?)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Oxidiert -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="fehler-oxidiert">
+                            <span class="travel-title">Oxidiert</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="fehler-oxidiert">
+                            <p style="font-size: 17px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8;">Ein oxidierter Wein hatte zu viel Kontakt mit Sauerstoff.</p>
+
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Woran erkennt man ihn?</h4>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8;">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> <strong style="color: var(--text-dark);">Weißwein:</strong> deutlich dunkler, gold- bis bräunlich</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> <strong style="color: var(--text-dark);">Rotwein:</strong> ziegelrot bis bräunlich</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> kaum Frische, wenig Spannung</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Wie schmeckt ein oxidierter Wein?</h4>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8;">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> flach, müde, manchmal bitter</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> erinnert an Apfelmost, Nüsse oder Sherry (ungewollt)</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> keine klare Frucht mehr</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Ursache</h4>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8;">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> schlecht schließender Kork</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> lange offen stehende Flasche</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> falsche Lagerung</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 0;">
+                                <h4 style="font-size: 20px; color: var(--wine-red); margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;">Was tun?</h4>
+                                <ul style="list-style: none; color: var(--text-light); font-size: 17px; line-height: 1.8;">
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> Oxidation lässt sich nicht rückgängig machen</li>
+                                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fas fa-check" style="color: var(--gold); position: absolute; left: 0; top: 5px;"></i> reklamieren (bei Weingut / Gastronomie), sonst nicht weiter trinken</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wichtig zum Schluss -->
+                    <div class="travel-item">
+                        <button class="travel-header" aria-expanded="false" aria-controls="fehler-wichtig">
+                            <span class="travel-title">Wichtig zum Schluss</span>
+                            <span class="travel-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="travel-content" id="fehler-wichtig">
+                            <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 20px; line-height: 1.8;">Schmeckt dir ein Wein, darfst du ihn trinken – unabhängig von Lehrmeinungen.</p>
+                            <p style="font-size: 17px; color: var(--text-dark); margin-bottom: 20px; line-height: 1.8;">Manche Stile wirken für Einsteiger „fehlerhaft", sind aber bewusst so gemacht.</p>
+                            <p style="font-size: 17px; color: var(--text-dark); line-height: 1.8; font-weight: 500;">Vertrau am Ende immer deinem eigenen Geschmack.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wine Quotes Section -->
+    <section class="wine-quotes" id="quotes">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Inspiration & Humor</span>
+                <h2 class="section-title">Weinweisheiten</h2>
+            </div>
+            <div class="quotes-grid">
+                <div class="quote-card"><p class="quote-text">Hirzenhain schenkt kräftig ein, Genuss muss schließlich flüssig sein.</p></div>
+                <div class="quote-card"><p class="quote-text">Ein Weinchen fein aus Hirzenhain, lädt jeden gleich zum Lachen ein.</p></div>
+                <div class="quote-card"><p class="quote-text">Riesling, Merlot, Chardonnay – Hauptsach' ist, uns tut nichts weh!</p></div>
+                <div class="quote-card"><p class="quote-text">Bei Wein und Spaß in Hirzenhain will keiner heut' lang nüchtern sein.</p></div>
+                <div class="quote-card"><p class="quote-text">Lieber vollmundig trinken, als kleinkariert denken!</p></div>
+                <div class="quote-card"><p class="quote-text">Hoch die Gläser, tief die Kehlen, gute Tropfen darf man nicht quälen.</p></div>
+                <div class="quote-card"><p class="quote-text">Bei Wein, Gesang und frohem Sinn – schenk nach, ich weiß nicht, wo ich bin!</p></div>
+                <div class="quote-card"><p class="quote-text">Mögen unsere Gläser niemals leer, und unser Kopf nie allzu schwer!</p></div>
+                <div class="quote-card"><p class="quote-text">Wein rein, Sorgen raus – so sieht Lebensfreude aus!</p></div>
+                <div class="quote-card"><p class="quote-text">Wein macht froh und hebt den Geist – wer anders denkt, hat schlecht gespeist!</p></div>
+                <div class="quote-card"><p class="quote-text">Ob Korken ploppt, ob Schrauber dreht, Hauptsach', dass der Pegel steht.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wine Reviews Section -->
+    <section class="wine-reviews" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" style="color: rgba(255,255,255,0.6);">Handverlesen</span>
+                <h2 class="section-title" style="color: white;">Wein Reviews</h2>
+            </div>
+            
+            <div class="reviews-grid">
+                <!-- Wine Card 1 -->
+                <div class="wine-card">
+                    <div class="wine-image">
+                        <img src="Bild1.png" alt="Château Margaux">
+                        <div class="wine-rating">5/5</div>
+                    </div>
+                    <div class="wine-details">
+                        <div class="wine-vintage">Jahrgang 2015</div>
+                        <h3>Château Margaux</h3>
+                        <p>Ein außergewöhnlicher Wein mit komplexen Aromen von schwarzen Früchten, subtilen Gewürznoten und einem Hauch von Eichenholz. Am Gaumen kraftvoll, aber elegant mit seidigen Tanninen.</p>
+                    </div>
+                </div>
+                <!-- Wine Card 2 -->
+                <div class="wine-card">
+                    <div class="wine-image">
+                        <img src="Bild2.png" alt="Mosel Riesling">
+                        <div class="wine-rating">4/5</div>
+                    </div>
+                    <div class="wine-details">
+                        <div class="wine-vintage">Jahrgang 2020</div>
+                        <h3>Mosel Riesling</h3>
+                        <p>Frischer, mineralischer Riesling mit Noten von grünem Apfel, Pfirsich und einem Hauch von Honig. Die ausgewogene Säure und Restsüße sorgen für ein harmonisches Geschmackserlebnis.</p>
+                    </div>
+                </div>
+                 <!-- Wine Card 3 -->
+                <div class="wine-card">
+                    <div class="wine-image">
+                        <img src="Bild3.png" alt="Provence Rosé">
+                        <div class="wine-rating">3/5</div>
+                    </div>
+                    <div class="wine-details">
+                        <div class="wine-vintage">Jahrgang 2023</div>
+                        <h3>Provence Rosé</h3>
+                        <p>Leichter, erfrischender Rosé mit Aromen von Erdbeeren, Himbeeren und einem Hauch von Zitrus. Perfekt für warme Sommerabende und als Begleitung zu leichten Gerichten.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Wine Jokes Section -->
+    <section class="wine-jokes" id="jokes">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Ein Augenzwinkern</span>
+                <h2 class="section-title">Weinwitze</h2>
+            </div>
+            <div class="jokes-grid">
+                <div class="joke-card">
+                    <p class="joke-question">Was sagte der Weißwein zum Rotwein?</p>
+                    <p class="joke-answer">„Sei nicht sauer, nur weil ich leichter im Abgang bin!“</p>
+                </div>
+                <div class="joke-card">
+                    <p class="joke-question">Was ist der Unterschied zwischen Wein und deiner Meinung?</p>
+                    <p class="joke-answer">Der Wein interessiert mich wirklich!</p>
+                </div>
+                <div class="joke-card">
+                    <p class="joke-question">Warum stehen Weinkenner nicht früh auf?</p>
+                    <p class="joke-answer">Weil sie am liebsten liegen bleiben.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Get in Touch</span>
+                <h2 class="section-title">Kontakt</h2>
+            </div>
+            <div class="contact-wrapper">
+                <p>Haben Sie Fragen oder möchten Sie auf unsere Warteliste für zukünftige Tastings? Kontaktieren Sie uns gerne!</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Wein Straße 123<br>35713 Hirzenhain</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p>+49 123 4567890</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>hirzenhainer.weinenthusiasten@web.de</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="#home" class="logo" style="color: white; margin-bottom: 20px; display: block;">Hirzenhainer <span>Weinenthusiasten</span></a>
+                    <p>Zwischen Weinwissen und Wahnsinn – mit Leidenschaft und Lebensfreude für die Hirzenhainer Weinkultur.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/hirzenhainer_weinenthusiasten/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">Über uns</a></li>
+                        <li><a href="#meetings">Treffen</a></li>
+                        <li><a href="#wine-travel">Weinreisen</a></li>
+                        <li><a href="#food-pairing">Food Pairing</a></li>
+                        <li><a href="#wine-terms">Begriffe</a></li>
+                        <li><a href="#terroir">Terroir</a></li>
+                        <li><a href="#tasting">Tasting</a></li>
+                        <li><a href="#servieren">Servieren</a></li>
+                        <li><a href="#weinfehler">Weinfehler</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Rechtliches</h3>
+                    <ul>
+                        <li><a href="#contact">Kontakt</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
+                        <li><a href="datenschutz.html">Datenschutz</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright" style="text-align: center; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+                <p>© 2026 Hirzenhainer Weinenthusiasten. Exzellenz im Glas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Waitlist Modal -->
+    <div class="modal" id="waitlistModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeWaitlistModal" aria-label="Schließen">×</span>
+            <h3 class="modal-title">Auf die Warteliste</h3>
+            <p>Tragen Sie sich hier ein, um über zukünftige Tastings informiert zu werden!</p>
+
+            <div class="google-form-container">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfqJ3WZ_ZysTaGoVK5_0WAo673ZE1jVAXc8Iax7iUEEKdShTg/viewform?embedded=true" 
+                        width="100%" 
+                        height="1245" 
+                        frameborder="0" 
+                        marginheight="0" 
+                        marginwidth="0">Wird geladen…</iframe>
+                </div>
+        </div>
+    </div>
+
+    <!-- Section Navigation Buttons -->
+    <div class="section-nav-buttons">
+        <button class="section-nav-btn" id="prevSection" aria-label="Vorherige Sektion">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+        <button class="section-nav-btn" id="nextSection" aria-label="Nächste Sektion">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+
+    <script>
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Section Navigation Buttons
+        const sectionNavButtons = document.querySelector('.section-nav-buttons');
+        const prevSectionBtn = document.getElementById('prevSection');
+        const nextSectionBtn = document.getElementById('nextSection');
+        
+        const sections = [
+            'home', 'about', 'meetings', 'wine-travel', 'food-pairing', 
+            'wine-terms', 'terroir', 'tasting', 'servieren', 'weinfehler', 
+            'quotes', 'reviews', 'jokes', 'contact'
+        ];
+
+        function getCurrentSection() {
+            const scrollPosition = window.pageYOffset + 200; // Offset für bessere Erkennung
+            
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = document.getElementById(sections[i]);
+                if (section && section.offsetTop <= scrollPosition) {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        function updateNavigationButtons() {
+            const currentIndex = getCurrentSection();
+            
+            // Buttons anzeigen nach dem Scrollen
+            if (window.pageYOffset > 300) {
+                sectionNavButtons.classList.add('active');
+            } else {
+                sectionNavButtons.classList.remove('active');
+            }
+
+            // Vorherige/Nächste Button aktivieren/deaktivieren
+            prevSectionBtn.disabled = currentIndex === 0;
+            nextSectionBtn.disabled = currentIndex === sections.length - 1;
+        }
+
+        prevSectionBtn.addEventListener('click', () => {
+            const currentIndex = getCurrentSection();
+            if (currentIndex > 0) {
+                const targetSection = document.getElementById(sections[currentIndex - 1]);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+
+        nextSectionBtn.addEventListener('click', () => {
+            const currentIndex = getCurrentSection();
+            if (currentIndex < sections.length - 1) {
+                const targetSection = document.getElementById(sections[currentIndex + 1]);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+
+        window.addEventListener('scroll', updateNavigationButtons);
+        window.addEventListener('load', updateNavigationButtons);
+
+        // Dropdown Menu Toggle (only on desktop)
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        
+        if (dropdownToggle && dropdownMenu) {
+            dropdownToggle.addEventListener('click', (e) => {
+                // Don't prevent default on mobile
+                if (window.innerWidth > 992) {
+                    e.preventDefault();
+                    dropdownMenu.classList.toggle('active');
+                }
+            });
+            
+            // Close dropdown when clicking outside (desktop only)
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth > 992) {
+                    if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                        dropdownMenu.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        // Hamburger Menu Toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        if (hamburgerBtn && mainNav) {
+            hamburgerBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                const icon = hamburgerBtn.querySelector('i');
+                if (mainNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close menu when clicking on a link
+            const navLinks = mainNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
+                    const icon = hamburgerBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        // Wine Travel Accordion
+        const travelHeaders = document.querySelectorAll('.travel-header');
+        travelHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const isExpanded = header.getAttribute('aria-expanded') === 'true';
+                const content = document.getElementById(header.getAttribute('aria-controls'));
+                
+                // Toggle current item
+                if (isExpanded) {
+                    header.setAttribute('aria-expanded', 'false');
+                    content.classList.remove('active');
+                } else {
+                    header.setAttribute('aria-expanded', 'true');
+                    content.classList.add('active');
+                }
+            });
+        });
+
+        // Food Pairing Cards
+        const foodCards = document.querySelectorAll('.food-card');
+        foodCards.forEach(card => {
+            const header = card.querySelector('.food-card-header');
+            header.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+
+        // Terroir Factor Cards
+        const terroirFactorCards = document.querySelectorAll('.terroir-factor-card');
+        terroirFactorCards.forEach(card => {
+            const header = card.querySelector('.terroir-factor-header');
+            header.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+
+        // Waitlist Modal Logic
+        const waitlistModal = document.getElementById('waitlistModal');
+        const openModalBtn = document.getElementById('waitlistBtn');
+        const closeModalBtn = document.getElementById('closeWaitlistModal');
+
+        function openModal() {
+            waitlistModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            waitlistModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (openModalBtn) {
+            openModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+
+        window.addEventListener('click', (e) => {
+            if (e.target === waitlistModal) {
+                closeModal();
+            }
+        });
+
+        // Simple Scroll Reveal
+        const revealElements = document.querySelectorAll('section, .meeting-card, .wine-card, .food-card');
+        const revealOnScroll = () => {
+            for (let i = 0; i < revealElements.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = revealElements[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    revealElements[i].style.opacity = '1';
+                    revealElements[i].style.transform = 'translateY(0)';
+                }
+            }
+        };
+
+        // Initialize reveal styles
+        revealElements.forEach(el => {
+            if (!el.classList.contains('hero')) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.8s ease-out';
+            }
+        });
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+    </script>
+</body>
+</html>
