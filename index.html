@@ -1214,7 +1214,7 @@
             <h1>Genuss in seiner <br>schönsten Form</h1>
             <p>Zwischen Weinwissen und Wahnsinn – ein exklusiver Kreis leidenschaftlicher Genießer in Hirzenhain.</p>
             <div style="display: flex; gap: 20px; justify-content: center; margin-top: 40px;">
-                <a href="#reviews" class="btn">Weinempfehlungen</a>
+                <a href="#" class="btn waitlist-trigger">Auf die Warteliste</a>
                 <a href="#about" class="btn btn-outline">Über den Club</a>
             </div>
         </div>
@@ -1233,7 +1233,7 @@
                     <p>Bei uns trifft Expertise auf Experimentierfreude, Candlelight auf Korkenzieher und Tiefgang auf Trinkfreude. Ob blauer Wein, Pinot Noir oder einfach nur gute Gesellschaft – bei uns ist <em>everytime Wine o'clock</em>.</p>
                     <p>Ergänzt wird dieses Selbstverständnis durch das, was uns im Kern ausmacht: Wir sind ein fester Freundeskreis von Gleichgesinnten, der sich aus Genuss, Neugier und Vernunft rund um das Thema Wein zusammengefunden hat. Unser Fokus liegt auf gemeinsamer Verkostung, ehrenamtlichem Austausch und einem angenehmen, ruhigen Miteinander ohne Leistungsdruck, aber mit Anspruch.</p>
                     <p>Als gewachsener Freundeskreis erweitern wir unseren Kreis für gewöhnlich nicht um neue Mitglieder. Aufgrund der hohen Nachfrage führen wir jedoch eine Warteliste, über die wir gelegentlich einzelne Gäste zu ausgewählten Abenden einladen.</p>
-                    <a href="#" class="btn" id="waitlistBtn" style="margin-top: 20px;">Auf die Warteliste</a>
+                    <a href="#" class="btn waitlist-trigger" style="margin-top: 20px;">Auf die Warteliste</a>
                 </div>
                 <div class="about-image">
                     <img src="Bild4.png" alt="Gesellige Weinverkostung">
@@ -2519,7 +2519,7 @@
 
         // Waitlist Modal Logic
         const waitlistModal = document.getElementById('waitlistModal');
-        const openModalBtn = document.getElementById('waitlistBtn');
+        const waitlistTriggers = document.querySelectorAll('.waitlist-trigger');
         const closeModalBtn = document.getElementById('closeWaitlistModal');
 
         function openModal() {
@@ -2532,12 +2532,12 @@
             document.body.style.overflow = '';
         }
 
-        if (openModalBtn) {
-            openModalBtn.addEventListener('click', (e) => {
+        waitlistTriggers.forEach(btn => {
+            btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 openModal();
             });
-        }
+        });
 
         if (closeModalBtn) {
             closeModalBtn.addEventListener('click', closeModal);
