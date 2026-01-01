@@ -1061,11 +1061,13 @@
             background: rgba(0,0,0,0.9);
             z-index: 2000;
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Changed from center to allow scrolling from top */
             justify-content: center;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 40px 0;
         }
 
         .modal.active {
@@ -1081,6 +1083,7 @@
             position: relative;
             transform: scale(0.9);
             transition: var(--transition);
+            margin: auto; /* Center in the scrollable area */
         }
 
         .modal.active .modal-content {
@@ -2339,7 +2342,7 @@
             <div class="google-form-container">
                 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfqJ3WZ_ZysTaGoVK5_0WAo673ZE1jVAXc8Iax7iUEEKdShTg/viewform?embedded=true" 
                         width="100%" 
-                        height="1845" 
+                        height="1945" 
                         frameborder="0" 
                         marginheight="0" 
                         marginwidth="0">Wird geladen…</iframe>
